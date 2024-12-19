@@ -1,6 +1,10 @@
 package app.weathertwin.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
@@ -21,12 +25,13 @@ public class WeathertwinController {
     }
 
     @GetMapping("/{city}")
-    public HashMap<String, Double> findLatAndLon(@PathVariable String city) {
+    public JsonNode getCityWeatherData(@PathVariable String city) {
         HashMap<String, Double> latAndLonMap = new HashMap<String, Double>();
+        JsonNode cityWeatherData = JsonNodeFactory.instance.objectNode();
 
         latAndLonMap = httpService.fetchLatAndLon(city);
+        cityWeatherData = httpService.fetchWeatherData(latAndLonMap.get("lat"), latAndLonMap.get("lon"));
 
-        return latAndLonMap;
+        return cityWeatherData;
     }
-
 }
