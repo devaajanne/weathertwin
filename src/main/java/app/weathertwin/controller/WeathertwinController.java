@@ -14,11 +14,17 @@ import app.weathertwin.service.HttpService;
 @RequestMapping("api/weather")
 public class WeathertwinController {
 
+    private HttpService httpService;
+
+    public WeathertwinController(HttpService httpService) {
+        this.httpService = httpService;
+    }
+
     @GetMapping("/{city}")
     public HashMap<String, Double> findLatAndLon(@PathVariable String city) {
         HashMap<String, Double> latAndLonMap = new HashMap<String, Double>();
 
-        latAndLonMap = HttpService.fetchLatAndLon(city);
+        latAndLonMap = httpService.fetchLatAndLon(city);
 
         return latAndLonMap;
     }
