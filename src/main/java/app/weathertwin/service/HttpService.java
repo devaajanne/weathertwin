@@ -10,6 +10,7 @@ import java.net.URI;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,6 @@ public class HttpService {
 
     // Geocoding API call to find given city's lon(gitude) and lat(itude)
     // Lon and lat are needed to make an weather API call for a specific city
-
     public HashMap<String, Double> fetchLatAndLon(String city) {
         HashMap<String, Double> latAndLonMap = new HashMap<String, Double>();
 
@@ -57,5 +57,33 @@ public class HttpService {
         }
 
         return latAndLonMap;
+    }
+
+    // Current weather data API call uses lon and lat data
+    // We got this data through previous API call
+    public JsonNode fetchWeatherData(Double lat, Double lon) {
+        JsonNode weatherData = JsonNodeFactory.instance.objectNode();
+
+        final String WEATHERDATA_URL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon
+                + "&appid=" + API_KEY;
+
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(WEATHERDATA_URL))
+                .GET()
+                .build();
+
+        HttpResponse<String> response;
+
+        try {
+            response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            weatherData = objectMapper.readTree(response.body());
+
+        } catch (IOException | InterruptedException exception) {
+            exception.printStackTrace();
+        }
+
+        return weatherData;
     }
 }
