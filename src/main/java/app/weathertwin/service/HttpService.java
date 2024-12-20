@@ -36,10 +36,9 @@ public class HttpService {
                 .GET()
                 .build();
 
-        HttpResponse<String> response;
-
         try {
-            response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest,
+                    HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(response.body());
@@ -72,10 +71,9 @@ public class HttpService {
                 .GET()
                 .build();
 
-        HttpResponse<String> response;
-
         try {
-            response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest,
+                    HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper objectMapper = new ObjectMapper();
             weatherData = objectMapper.readTree(response.body());
