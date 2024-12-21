@@ -7,55 +7,58 @@ import jakarta.persistence.Id;
 public class WeatherData {
 
     @Id
-    Long id;
-    
-    String lat, lon, city;
+    Integer id;
+
+    Double lat, lon;
+    String city;
+    Double temp;
 
     public WeatherData() {
     }
 
-    public WeatherData(Long id, String lat, String lon, String city) {
+    public WeatherData(Integer id, Double lat, Double lon, String city, Double temp) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
         this.city = city;
+        this.temp = temp;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public WeatherData id(Long id) {
+    public WeatherData id(Integer id) {
         setId(id);
         return this;
     }
 
-    public String getLat() {
+    public Double getLat() {
         return this.lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public WeatherData lat(String lat) {
+    public WeatherData lat(Double lat) {
         setLat(lat);
         return this;
     }
 
-    public String getLon() {
+    public Double getLon() {
         return this.lon;
     }
 
-    public void setLon(String lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 
-    public WeatherData lon(String lon) {
+    public WeatherData lon(Double lon) {
         setLon(lon);
         return this;
     }
@@ -73,6 +76,19 @@ public class WeatherData {
         return this;
     }
 
+    public Double getTemp() {
+        return this.temp;
+    }
+
+    public void setTemp(Double temp) {
+        this.temp = temp;
+    }
+
+    public WeatherData temp(Double temp) {
+        setTemp(temp);
+        return this;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -80,6 +96,7 @@ public class WeatherData {
                 ", lat='" + getLat() + "'" +
                 ", lon='" + getLon() + "'" +
                 ", city='" + getCity() + "'" +
+                ", temp='" + getTemp() + "'" +
                 "}";
     }
 
