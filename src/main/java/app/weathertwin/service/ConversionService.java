@@ -34,11 +34,15 @@ public class ConversionService {
             weatherData.setLon(cityWeatherDataJSON.get("coord").get("lon").asDouble());
             weatherData.setCity(cityWeatherDataJSON.get("name").asText());
 
-            if (unit.equals("metric")) {
+            if (unit == null) {
+                weatherData.setTemp(cityWeatherDataJSON.get("main").get("temp").asDouble());
+            }
+
+            if (unit != null && unit.equals("metric")) {
                 weatherData.setTemp(tempStandardToMetric(cityWeatherDataJSON.get("main").get("temp").asDouble()));
             }
 
-            if (unit.equals("imperial")) {
+            if (unit != null && unit.equals("imperial")) {
                 weatherData.setTemp(tempStandardToImperial(cityWeatherDataJSON.get("main").get("temp").asDouble()));
             }
         }
