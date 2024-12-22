@@ -2,6 +2,7 @@ package app.weathertwin.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class WeatherData {
@@ -10,17 +11,18 @@ public class WeatherData {
     Integer id;
 
     Double lat, lon;
-    String city;
+    String city, countryCode;
     Double temp;
 
     public WeatherData() {
     }
 
-    public WeatherData(Integer id, Double lat, Double lon, String city, Double temp) {
+    public WeatherData(Integer id, Double lat, Double lon, String city, String countryCode, Double temp) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
         this.city = city;
+        this.countryCode = countryCode;
         this.temp = temp;
     }
 
@@ -76,6 +78,19 @@ public class WeatherData {
         return this;
     }
 
+    public String getCountryCode() {
+        return this.countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public WeatherData countryCode(String countryCode) {
+        setCountryCode(countryCode);
+        return this;
+    }
+
     public Double getTemp() {
         return this.temp;
     }
@@ -92,12 +107,14 @@ public class WeatherData {
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
-                ", lat='" + getLat() + "'" +
-                ", lon='" + getLon() + "'" +
-                ", city='" + getCity() + "'" +
-                ", temp='" + getTemp() + "'" +
-                "}";
+            " id='" + getId() + "'" +
+            ", lat='" + getLat() + "'" +
+            ", lon='" + getLon() + "'" +
+            ", city='" + getCity() + "'" +
+            ", countryCode='" + getCountryCode() + "'" +
+            ", temp='" + getTemp() + "'" +
+            "}";
     }
+    
 
 }
