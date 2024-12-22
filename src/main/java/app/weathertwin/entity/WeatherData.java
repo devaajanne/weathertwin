@@ -2,7 +2,6 @@ package app.weathertwin.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import java.util.Objects;
 
 @Entity
 public class WeatherData {
@@ -107,14 +106,13 @@ public class WeatherData {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", lat='" + getLat() + "'" +
-            ", lon='" + getLon() + "'" +
-            ", city='" + getCity() + "'" +
-            ", countryCode='" + getCountryCode() + "'" +
-            ", temp='" + getTemp() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", lat='" + getLat() + "'" +
+                ", lon='" + getLon() + "'" +
+                ", city='" + getCity() + "'" +
+                ", countryCode='" + getCountryCode() + "'" +
+                ", temp='" + getTemp() + "'" +
+                "}";
     }
-    
 
 }
