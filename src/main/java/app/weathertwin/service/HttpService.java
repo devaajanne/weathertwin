@@ -20,12 +20,16 @@ public class HttpService {
 
     // API key is referenced from application properties file
     // This is not included in version control for safety reasons
+    private static String API_KEY;
+
     @Value("${APIkey}")
-    private String API_KEY;
+    public void setStaticName(String name) {
+        API_KEY = name;
+    }
 
     // Geocoding API call to find given city's lon(gitude) and lat(itude)
     // Lon and lat are needed to make an weather API call for a specific city
-    public HashMap<String, Double> fetchLatAndLon(String city) {
+    public static HashMap<String, Double> fetchLatAndLon(String city) {
         HashMap<String, Double> latAndLonMap = new HashMap<String, Double>();
 
         final String GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid="
@@ -60,7 +64,7 @@ public class HttpService {
 
     // Current weather data API call uses lon and lat data
     // We got this data through previous API call
-    public JsonNode fetchWeatherData(Double lat, Double lon) {
+    public static JsonNode fetchWeatherData(Double lat, Double lon) {
         JsonNode weatherData = JsonNodeFactory.instance.objectNode();
 
         final String WEATHERDATA_URL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon

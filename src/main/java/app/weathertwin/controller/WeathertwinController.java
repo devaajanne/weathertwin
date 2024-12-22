@@ -17,18 +17,12 @@ import app.weathertwin.service.ConversionService;
 @RequestMapping("api/weatherdata")
 public class WeathertwinController {
 
-    private HttpService httpService;
-
-    public WeathertwinController(HttpService httpService) {
-        this.httpService = httpService;
-    }
-
     @GetMapping
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {
         HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
 
-        HashMap<String, Double> latAndLonMap = httpService.fetchLatAndLon(requestBody.get("city").asText());
-        JsonNode cityWeatherDataJSON = httpService.fetchWeatherData(
+        HashMap<String, Double> latAndLonMap = HttpService.fetchLatAndLon(requestBody.get("city").asText());
+        JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(
                 latAndLonMap.get("lat"),
                 latAndLonMap.get("lon"));
 
