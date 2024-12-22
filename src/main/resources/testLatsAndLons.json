@@ -1,11 +1,47 @@
 [
-  { "city": "Helsinki,FI", "coords": { "lat": 60.1699, "lon": 24.9384 } },
-  { "city": "Berlin,DE", "coords": { "lat": 52.5205, "lon": 13.3921 } },
-  { "city": "Paris,FR", "coords": { "lat": 48.8589, "lon": 2.32 } },
-  { "city": "New_York, US", "coords": { "lat": 40.7127, "lon": -74.006 } },
-  { "city": "Tokyo,JP", "coords": { "lat": 35.6828, "lon": 139.7595 } },
-  { "city": "Los_Angeles,US", "coords": { "lat": 34.0537, "lon": -118.2428 } },
-  { "city": "Sydney,AU", "coords": { "lat": -33.8698, "lon": 151.2083 } },
-  { "city": "Cairo,EG", "coords": { "lat": 30.0444, "lon": 31.2357 } },
-  { "city": "Cape_Town,ZA", "coords": { "lat": -33.929, "lon": 18.4174 } }
+  {
+    "city": "Helsinki",
+    "country_code": "FI",
+    "coords": { "lat": 60.1699, "lon": 24.9384 }
+  },
+  {
+    "city": "Berlin",
+    "country_code": "DE",
+    "coords": { "lat": 52.5205, "lon": 13.3921 }
+  },
+  {
+    "city": "Paris",
+    "country_code": "FR",
+    "coords": { "lat": 48.8589, "lon": 2.32 }
+  },
+  {
+    "city": "New_York",
+    "country_code": "US",
+    "coords": { "lat": 40.7127, "lon": -74.006 }
+  },
+  {
+    "city": "Tokyo",
+    "country_code": "JP",
+    "coords": { "lat": 35.6828, "lon": 139.7595 }
+  },
+  {
+    "city": "Los_Angeles",
+    "country_code": "US",
+    "coords": { "lat": 34.0537, "lon": -118.2428 }
+  },
+  {
+    "city": "Sydney",
+    "country_code": "AU",
+    "coords": { "lat": -33.8698, "lon": 151.2083 }
+  },
+  {
+    "city": "Cairo",
+    "country_code": "EG",
+    "coords": { "lat": 30.0444, "lon": 31.2357 }
+  },
+  {
+    "city": "Cape_Town",
+    "country_code": "ZA",
+    "coords": { "lat": -33.929, "lon": 18.4174 }
+  }
 ]
