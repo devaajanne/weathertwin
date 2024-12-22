@@ -20,6 +20,7 @@ public class HttpService {
 
     // API key is referenced from application properties file
     // This is not included in version control for safety reasons
+    // https://www.baeldung.com/spring-inject-static-field
     private static String API_KEY;
 
     @Value("${APIkey}")
@@ -35,6 +36,8 @@ public class HttpService {
         final String GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid="
                 + API_KEY;
 
+        // https://www.baeldung.com/java-9-http-client
+        // https://www.baeldung.com/java-uri-create-and-new-uri
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(GEOCODING_URL))
                 .GET()
@@ -44,6 +47,7 @@ public class HttpService {
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest,
                     HttpResponse.BodyHandlers.ofString());
 
+            // https://www.baeldung.com/jackson-object-mapper-tutorial
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(response.body());
 

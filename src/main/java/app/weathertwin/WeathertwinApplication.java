@@ -33,6 +33,7 @@ public class WeathertwinApplication {
 			// TODO: add test lats and lons here, fetch the weather data with a loop (?),
 			// convert the data with DTO to an entity, save to database
 
+			// https://www.baeldung.com/jackson-object-mapper-tutorial
 			ObjectMapper objectMapper = new ObjectMapper();
 			File latsAndLonsFile = new File("src\\main\\resources\\testLatsAndLons.json");
 			JsonNode rootNode = objectMapper.readValue(latsAndLonsFile, JsonNode.class);
