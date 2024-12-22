@@ -30,9 +30,6 @@ public class WeathertwinApplication {
 
 			System.out.println("Weather Twin is running");
 
-			// TODO: add test lats and lons here, fetch the weather data with a loop (?),
-			// convert the data with DTO to an entity, save to database
-
 			// https://www.baeldung.com/jackson-object-mapper-tutorial
 			ObjectMapper objectMapper = new ObjectMapper();
 			File latsAndLonsFile = new File("src\\main\\resources\\testLatsAndLons.json");
@@ -46,11 +43,14 @@ public class WeathertwinApplication {
 				JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
 				WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON, null);
 
+				// Here we set the weather data object's city attribute from the JSON file
+				// This is because the weather API does not always return the correct city name
+				weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
+
 				weatherDataRepository.save(weatherData);
 			}
 
 			System.out.println(weatherDataRepository.findAll());
-
 		};
 	}
 }
