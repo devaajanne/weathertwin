@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 public class WeatherData {
 
     @Id
-    Integer id;
+    Long id;
 
     Double lat, lon;
     String city, countryCode;
@@ -16,7 +16,7 @@ public class WeatherData {
     public WeatherData() {
     }
 
-    public WeatherData(Integer id, Double lat, Double lon, String city, String countryCode, Double temp) {
+    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, Double temp) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
@@ -25,15 +25,15 @@ public class WeatherData {
         this.temp = temp;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public WeatherData id(Integer id) {
+    public WeatherData id(Long id) {
         setId(id);
         return this;
     }

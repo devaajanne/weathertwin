@@ -29,7 +29,7 @@ public class ConversionService {
         if (cityWeatherDataJSON == null) {
             return weatherData;
         } else {
-            weatherData.setId(cityWeatherDataJSON.get("id").asInt());
+            weatherData.setId(cityWeatherDataJSON.get("id").asLong());
             weatherData.setLat(cityWeatherDataJSON.get("coord").get("lat").asDouble());
             weatherData.setLon(cityWeatherDataJSON.get("coord").get("lon").asDouble());
             weatherData.setCountryCode(cityWeatherDataJSON.get("sys").get("country").asText());
