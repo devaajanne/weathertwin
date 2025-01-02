@@ -17,10 +17,21 @@ public class QueryService {
     }
 
     public List<WeatherData> findSimilarWeatherDataFromrepository(WeatherData inputWeatherData) {
-        Double minTemp = inputWeatherData.getTemp() - 1.0;
-        Double maxTemp = inputWeatherData.getTemp() + 1.0;
+        Double minTemp = inputWeatherData.getTemp() - 0.5;
+        Double maxTemp = inputWeatherData.getTemp() + 0.5;
+        Double minLon = inputWeatherData.getLon() - 10.0;
+        Double maxLon = inputWeatherData.getLon() + 10.0;
+        Double minLat = inputWeatherData.getLat() - 10.0;
+        Double maxLat = inputWeatherData.getLat() + 10.0;
         Long id = inputWeatherData.getId();
 
-        return weatherDataRepository.findWeatherDataThatMeetsConditions(minTemp, maxTemp, id);
+        return weatherDataRepository.findWeatherDataThatMeetsConditions(
+                minTemp,
+                maxTemp,
+                minLon,
+                maxLon,
+                minLat,
+                maxLat,
+                id);
     }
 }
