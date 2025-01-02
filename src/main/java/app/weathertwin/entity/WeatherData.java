@@ -1,5 +1,6 @@
 package app.weathertwin.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -13,18 +14,24 @@ public class WeatherData {
 
     Double lat, lon;
     String city, countryCode;
+
+    @Column(name = "weather_group")
+    String weatherGroup;
+    
     Double temp;
 
     public WeatherData() {
     }
 
-    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, Double temp) {
+    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, Double temp,
+            String weatherGroup) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
         this.city = city;
         this.countryCode = countryCode;
         this.temp = temp;
+        this.weatherGroup = weatherGroup;
     }
 
     public Long getId() {
@@ -92,6 +99,19 @@ public class WeatherData {
         return this;
     }
 
+    public String getWeatherGroup() {
+        return this.weatherGroup;
+    }
+
+    public void setWeatherGroup(String weatherGroup) {
+        this.weatherGroup = weatherGroup;
+    }
+
+    public WeatherData weatherGroup(String weatherGroup) {
+        setWeatherGroup(weatherGroup);
+        return this;
+    }
+
     public Double getTemp() {
         return this.temp;
     }
@@ -113,8 +133,8 @@ public class WeatherData {
                 ", lon='" + getLon() + "'" +
                 ", city='" + getCity() + "'" +
                 ", countryCode='" + getCountryCode() + "'" +
+                ", weatherGroup='" + getWeatherGroup() + "'" +
                 ", temp='" + getTemp() + "'" +
                 "}";
     }
-
 }
