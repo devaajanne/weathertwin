@@ -6,6 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,29 +19,45 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import app.weathertwin.entity.WeatherData;
+import app.weathertwin.repository.WeatherDataRepository;
 import app.weathertwin.service.HttpService;
 import app.weathertwin.service.ConversionService;
+import app.weathertwin.service.QueryService;
 
 @RestController
 @RequestMapping("api")
 public class WeathertwinController {
 
+    private final WeatherDataRepository weatherDataRepository;
+    private final QueryService queryService;
+
+    public WeathertwinController(WeatherDataRepository weatherDataRepository, QueryService queryService) {
+        this.weatherDataRepository = weatherDataRepository;
+        this.queryService = queryService;
+    }
+
     @GetMapping("/weatherdata")
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {
         HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
+        String inputCity = requestBody.get("city").asText();
+        String targetUnit = requestBody.get("unit").asText();
 
-        HashMap<String, Double> latAndLonMap = HttpService.fetchLatAndLon(requestBody.get("city").asText());
+        HashMap<String, Double> latAndLonMap = HttpService.fetchLatAndLon(inputCity);
         JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(
                 latAndLonMap.get("lat"),
                 latAndLonMap.get("lon"));
 
-        WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON,
-                requestBody.get("unit").asText());
-        // TODO: implement logic/call method to find a city with similar weather
+        WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
+        inputLocationData.setCity(inputCity);
+        
+        List<WeatherData> similarWeatherDataList = queryService.findSimilarWeatherDataFromrepository(inputLocationData);
 
-        returnedMap.put("inputLocation", inputLocationData);
-        returnedMap.put("similarLocation", null);
+        Random random = new Random();
 
+        returnedMap.put("inputLocation", ConversionService.convertTemp(inputLocationData, targetUnit));
+        returnedMap.put("similarLocation", ConversionService.convertTemp(
+                similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size())), targetUnit));
+        
         return returnedMap;
     }
 
@@ -115,5 +133,17 @@ public class WeathertwinController {
         }
 
         return rootNode;
+    }
+
+    @GetMapping("/findbyid")
+    public WeatherData findById(@RequestBody JsonNode requestBody) {
+        Long id = requestBody.get("id").asLong();
+
+        return (weatherDataRepository.findById(id).get());
+    }
+
+    @GetMapping("/findall")
+    public Iterable<WeatherData> findAll() {
+        return (weatherDataRepository.findAll());
     }
 }
