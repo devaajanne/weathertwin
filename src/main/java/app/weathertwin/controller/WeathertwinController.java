@@ -49,15 +49,20 @@ public class WeathertwinController {
 
         WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
         inputLocationData.setCity(inputCity);
-        
+
         List<WeatherData> similarWeatherDataList = queryService.findSimilarWeatherDataFromrepository(inputLocationData);
 
         Random random = new Random();
 
         returnedMap.put("inputLocation", ConversionService.convertTemp(inputLocationData, targetUnit));
-        returnedMap.put("similarLocation", ConversionService.convertTemp(
-                similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size())), targetUnit));
-        
+
+        if (similarWeatherDataList.size() == 0) {
+            returnedMap.put("similarLocation", null);
+        } else {
+            returnedMap.put("similarLocation", ConversionService.convertTemp(
+                    similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size())), targetUnit));
+        }
+
         return returnedMap;
     }
 
