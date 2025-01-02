@@ -32,25 +32,40 @@ public class WeathertwinApplication {
 
 			// https://www.baeldung.com/jackson-object-mapper-tutorial
 			ObjectMapper objectMapper = new ObjectMapper();
-			File latsAndLonsFile = new File("src\\main\\resources\\testLatsAndLons.json");
+			File latsAndLonsFile = new File("src\\main\\resources\\citiesLatsAndLons.json");
 			JsonNode rootNode = objectMapper.readValue(latsAndLonsFile, JsonNode.class);
 
-			for (int i = 0; i < rootNode.size(); i++) {
+			while (true) {
+				long startTime = System.nanoTime();
 
-				Double lat = rootNode.get(i).get("coords").get("lat").asDouble();
-				Double lon = rootNode.get(i).get("coords").get("lon").asDouble();
+				for (int i = 0; i < rootNode.size(); i++) {
+					Double lat = rootNode.get(i).get("coords").get("lat").asDouble();
+					Double lon = rootNode.get(i).get("coords").get("lon").asDouble();
 
-				JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
-				WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON, null);
+					JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
+					WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
 
-				// Here we set the weather data object's city attribute from the JSON file
-				// This is because the weather API does not always return the correct city name
-				weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
+					// Here we set the weather data object's city attribute from the JSON file
+					// This is because the weather API does not always return the correct city name
+					weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
 
-				weatherDataRepository.save(weatherData);
+					weatherDataRepository.save(weatherData);
+
+					System.out.println(i + 1 + " " + rootNode.get(i).get("city") + ", "
+							+ rootNode.get(i).get("country_code").asText() + ", id " + weatherData.getId() + ", temp: " + weatherData.getTemp());
+				}
+
+				long stopTime = System.nanoTime();
+				Long duration = stopTime - startTime;
+
+				System.out.println(
+						"JSON file fetch and database save time: " + duration / 1000000000 + " seconds");
+
+				System.out.println("Repository size : " + weatherDataRepository.count() + " entries");
+
+				Thread.sleep(600000 - (duration / 1000000));
 			}
 
-			System.out.println(weatherDataRepository.findAll());
 		};
 	}
 }
