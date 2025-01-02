@@ -20,9 +20,12 @@ public interface WeatherDataRepository extends CrudRepository<WeatherData, Long>
     // and lat must be OUTSIDE certain parameters to that the locations are
     // sufficiently far away from each other
     //
-    // 3) we don't want to return the input location, so we check that the ids in
+    // 3) we want to find locations that are experiencing the same kind of weather,
+    // so weather groups must match
+    //
+    // 4) we don't want to return the input location, so we check that the ids in
     // the input location and found similar location are not the same
-    @Query(value = "SELECT * FROM weatherdatatable WHERE (temp BETWEEN :minTemp AND :maxTemp) AND (lon NOT BETWEEN :minLon AND :maxLon) AND (lat NOT BETWEEN :minLat AND :maxLat) AND id != :id ", nativeQuery = true)
+    @Query(value = "SELECT * FROM weatherdatatable WHERE (temp BETWEEN :minTemp AND :maxTemp) AND (lon NOT BETWEEN :minLon AND :maxLon) AND (lat NOT BETWEEN :minLat AND :maxLat) AND (weather_group = :weatherGroup) AND (id != :id)", nativeQuery = true)
     List<WeatherData> findWeatherDataThatMeetsConditions(
             @Param("minTemp") Double minTemp,
             @Param("maxTemp") Double maxTemp,
@@ -30,5 +33,6 @@ public interface WeatherDataRepository extends CrudRepository<WeatherData, Long>
             @Param("maxLon") Double maxLon,
             @Param("minLat") Double minLat,
             @Param("maxLat") Double maxLat,
+            @Param("weatherGroup") String weatherGroup,
             @Param("id") Long id);
 }
