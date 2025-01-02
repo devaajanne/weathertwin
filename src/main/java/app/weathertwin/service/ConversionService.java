@@ -23,29 +23,36 @@ public class ConversionService {
         return imperialTemp;
     }
 
-    public static WeatherData JsonNodeToWeatherData(JsonNode cityWeatherDataJSON, String unit) {
+    public static WeatherData JsonNodeToWeatherData(JsonNode cityWeatherDataJSON) {
         WeatherData weatherData = new WeatherData();
 
         if (cityWeatherDataJSON == null) {
             return weatherData;
-        } else {
-            weatherData.setId(cityWeatherDataJSON.get("id").asLong());
-            weatherData.setLat(cityWeatherDataJSON.get("coord").get("lat").asDouble());
-            weatherData.setLon(cityWeatherDataJSON.get("coord").get("lon").asDouble());
-            weatherData.setCountryCode(cityWeatherDataJSON.get("sys").get("country").asText());
-            weatherData.setCity(cityWeatherDataJSON.get("name").asText());
+        }
 
-            if (unit == null) {
-                weatherData.setTemp(cityWeatherDataJSON.get("main").get("temp").asDouble());
-            }
+        weatherData.setId(cityWeatherDataJSON.get("id").asLong());
+        weatherData.setLat(cityWeatherDataJSON.get("coord").get("lat").asDouble());
+        weatherData.setLon(cityWeatherDataJSON.get("coord").get("lon").asDouble());
+        weatherData.setCity(cityWeatherDataJSON.get("name").asText());
+        weatherData.setCountryCode(cityWeatherDataJSON.get("sys").get("country").asText());
+        weatherData.setTemp(cityWeatherDataJSON.get("main").get("temp").asDouble());
 
-            if (unit != null && unit.equals("metric")) {
-                weatherData.setTemp(tempStandardToMetric(cityWeatherDataJSON.get("main").get("temp").asDouble()));
-            }
+        return weatherData;
+    }
 
-            if (unit != null && unit.equals("imperial")) {
-                weatherData.setTemp(tempStandardToImperial(cityWeatherDataJSON.get("main").get("temp").asDouble()));
-            }
+    public static WeatherData convertTemp(WeatherData weatherData, String unit) {
+
+        // If no unit is given, standard (kelvin) temperature is returned
+        if (unit == null) {
+            weatherData.setTemp(weatherData.getTemp());
+        }
+
+        if (unit != null && unit.equals("metric")) {
+            weatherData.setTemp(tempStandardToMetric(weatherData.getTemp()));
+        }
+
+        if (unit != null && unit.equals("imperial")) {
+            weatherData.setTemp(tempStandardToImperial(weatherData.getTemp()));
         }
 
         return weatherData;
