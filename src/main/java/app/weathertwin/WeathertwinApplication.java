@@ -52,7 +52,7 @@ public class WeathertwinApplication {
 					weatherDataRepository.save(weatherData);
 
 					System.out.println(i + 1 + " " + rootNode.get(i).get("city") + ", "
-							+ rootNode.get(i).get("country_code").asText() + ", id " + weatherData.getId() + ", temp: " + weatherData.getTemp());
+							+ rootNode.get(i).get("country_code").asText() + ", id " + weatherData.getId() + ", temp: " + weatherData.getTemp() + ", descrption: " + weatherData.getWeatherGroup());
 				}
 
 				long stopTime = System.nanoTime();
