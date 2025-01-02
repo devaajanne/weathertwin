@@ -2,8 +2,10 @@ package app.weathertwin.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "weatherdatatable")
 public class WeatherData {
 
     @Id
