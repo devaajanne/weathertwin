@@ -23,6 +23,7 @@ public class QueryService {
         Double maxLon = inputWeatherData.getLon() + 10.0;
         Double minLat = inputWeatherData.getLat() - 10.0;
         Double maxLat = inputWeatherData.getLat() + 10.0;
+        String weatherGroup = inputWeatherData.getWeatherGroup();
         Long id = inputWeatherData.getId();
 
         return weatherDataRepository.findWeatherDataThatMeetsConditions(
@@ -32,6 +33,7 @@ public class QueryService {
                 maxLon,
                 minLat,
                 maxLat,
+                weatherGroup,
                 id);
     }
 }
