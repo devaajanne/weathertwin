@@ -1,6 +1,7 @@
 package app.weathertwin;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,7 +37,7 @@ public class WeathertwinApplication {
 			JsonNode rootNode = objectMapper.readValue(latsAndLonsFile, JsonNode.class);
 
 			while (true) {
-				long startTime = System.nanoTime();
+				long startTime = System.currentTimeMillis();
 
 				for (int i = 0; i < rootNode.size(); i++) {
 					Double lat = rootNode.get(i).get("coords").get("lat").asDouble();
@@ -50,22 +51,15 @@ public class WeathertwinApplication {
 					weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
 
 					weatherDataRepository.save(weatherData);
-
-					System.out.println(i + 1 + " " + rootNode.get(i).get("city") + ", "
-							+ rootNode.get(i).get("country_code").asText() + ", id " + weatherData.getId() + ", temp: " + weatherData.getTemp() + ", descrption: " + weatherData.getWeatherGroup());
 				}
 
-				long stopTime = System.nanoTime();
-				Long duration = stopTime - startTime;
+				long endTime = System.currentTimeMillis();
+				long duration = endTime - startTime;
 
-				System.out.println(
-						"JSON file fetch and database save time: " + duration / 1000000000 + " seconds");
-
-				System.out.println("Repository size : " + weatherDataRepository.count() + " entries");
-
-				Thread.sleep(600000 - (duration / 1000000));
+				// Here we set the app to sleep until 1 hour has passed since the start of the
+				// last loop, then repeat to get updated data
+				TimeUnit.MILLISECONDS.sleep(3600000 - duration);
 			}
-
 		};
 	}
 }
