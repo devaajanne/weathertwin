@@ -39,7 +39,7 @@ public class WeathertwinController {
     @GetMapping("/weatherdata")
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {
         HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
-        String inputCity = requestBody.get("city").asText();
+        String inputCity = requestBody.get("city").asText().replace(" ", "_");
         String targetUnit = requestBody.get("unit").asText();
 
         HashMap<String, Double> latAndLonMap = HttpService.fetchLatAndLon(inputCity);
@@ -48,7 +48,7 @@ public class WeathertwinController {
                 latAndLonMap.get("lon"));
 
         WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
-        inputLocationData.setCity(inputCity);
+        inputLocationData.setCity(inputCity.replace("_", " "));
 
         List<WeatherData> similarWeatherDataList = queryService.findSimilarWeatherDataFromrepository(inputLocationData);
 
