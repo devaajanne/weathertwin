@@ -3224,11 +3224,35 @@
     }
   },
   {
+    "city": "Forssa",
+    "country_code": "FI",
+    "coords": {
+      "lat": 60.8155736,
+      "lon": 23.629833
+    }
+  },
+  {
+    "city": "Helsinki",
+    "country_code": "FI",
+    "coords": {
+      "lat": 60.1674881,
+      "lon": 24.9427473
+    }
+  },
+  {
     "city": "Kemijärvi",
     "country_code": "FI",
     "coords": {
       "lat": 66.71309,
       "lon": 27.43056
+    }
+  },
+  {
+    "city": "Turku",
+    "country_code": "FI",
+    "coords": {
+      "lat": 60.4517531,
+      "lon": 22.2670522
     }
   },
   {
