@@ -15,7 +15,7 @@ The app provides one endpoint, api/weatherdata. This endpoint does not require a
 
 **URL** : `/api/weatherdata`
 
-**Method** : `GET`
+**Method** : `POST`
 
 **Auth required** : No
 
@@ -32,7 +32,7 @@ The request body should be a JSON object. It must include the following fields:
 
 #### Example request
 
-`GET /api/weatherdata`
+`POST /api/weatherdata`
 
 ```json
 {
@@ -45,7 +45,7 @@ The request body should be a JSON object. It must include the following fields:
 
 **Condition** : Data provided in the body is valid.
 
-**Code** : ``200 OK`
+**Code** : `200 OK`
 
 **Content example** : Returns a JSON object with two properties: `inputLocation` and `similarLocation`.
 
