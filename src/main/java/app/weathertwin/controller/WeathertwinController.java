@@ -40,16 +40,15 @@ public class WeathertwinController {
     @PostMapping("/weatherdata")
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {
         HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
-        String inputCity = requestBody.get("city").asText().replace(" ", "_");
+        
+        JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(
+                requestBody.get("cityCoords").get("lat").asDouble(),
+                requestBody.get("cityCoords").get("lon").asDouble());
+        
         String targetUnit = requestBody.get("unit").asText();
 
-        HashMap<String, Double> latAndLonMap = HttpService.fetchLatAndLon(inputCity);
-        JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(
-                latAndLonMap.get("lat"),
-                latAndLonMap.get("lon"));
-
         WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
-        inputLocationData.setCity(inputCity.replace("_", " "));
+        inputLocationData.setCity((requestBody.get("cityName").asText().split(","))[0]);
 
         List<WeatherData> similarWeatherDataList = queryService.findSimilarWeatherDataFromrepository(inputLocationData);
 
