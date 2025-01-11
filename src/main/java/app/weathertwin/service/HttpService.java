@@ -74,6 +74,8 @@ public class HttpService {
         final String WEATHERDATA_URL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon
                 + "&appid=" + API_KEY;
 
+        // https://www.baeldung.com/java-9-http-client
+        // https://www.baeldung.com/java-uri-create-and-new-uri
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(WEATHERDATA_URL))
                 .GET()
@@ -83,6 +85,7 @@ public class HttpService {
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest,
                     HttpResponse.BodyHandlers.ofString());
 
+            // https://www.baeldung.com/jackson-object-mapper-tutorial
             ObjectMapper objectMapper = new ObjectMapper();
             weatherData = objectMapper.readTree(response.body());
 
