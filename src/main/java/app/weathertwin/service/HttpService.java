@@ -67,7 +67,8 @@ public class HttpService {
     }
 
     // Current weather data API call uses lon and lat data
-    // We got this data through previous API call
+    // We got this data through a library in the client,
+    // passed to server through http body
     public static JsonNode fetchWeatherData(Double lat, Double lon) {
         JsonNode weatherData = JsonNodeFactory.instance.objectNode();
 
