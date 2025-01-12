@@ -1,7 +1,5 @@
 package app.weathertwin.service;
 
-import java.util.HashMap;
-
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
@@ -26,44 +24,6 @@ public class HttpService {
     @Value("${APIkey}")
     public void setStaticName(String name) {
         API_KEY = name;
-    }
-
-    // Geocoding API call to find given city's lon(gitude) and lat(itude)
-    // Lon and lat are needed to make an weather API call for a specific city
-    public static HashMap<String, Double> fetchLatAndLon(String city) {
-        HashMap<String, Double> latAndLonMap = new HashMap<String, Double>();
-
-        final String GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid="
-                + API_KEY;
-
-        // https://www.baeldung.com/java-9-http-client
-        // https://www.baeldung.com/java-uri-create-and-new-uri
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create(GEOCODING_URL))
-                .GET()
-                .build();
-
-        try {
-            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest,
-                    HttpResponse.BodyHandlers.ofString());
-
-            // https://www.baeldung.com/jackson-object-mapper-tutorial
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(response.body());
-
-            if (rootNode.isArray() && rootNode.size() > 0) {
-                JsonNode firstElement = rootNode.get(0);
-                latAndLonMap.put("lat", firstElement.get("lat").asDouble());
-                latAndLonMap.put("lon", firstElement.get("lon").asDouble());
-            } else {
-                System.out.println("City not found or empty response");
-            }
-
-        } catch (IOException | InterruptedException exception) {
-            exception.printStackTrace();
-        }
-
-        return latAndLonMap;
     }
 
     // Current weather data API call uses lon and lat data
