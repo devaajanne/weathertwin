@@ -19,11 +19,11 @@ public class HttpService {
     // API key is referenced from application properties file
     // This is not included in version control for safety reasons
     // https://www.baeldung.com/spring-inject-static-field
-    private static String API_KEY;
+    private static String OPEN_WEATHER_API_KEY;
 
-    @Value("${APIkey}")
+    @Value("${OpenWeatherAPIkey}")
     public void setStaticName(String name) {
-        API_KEY = name;
+        OPEN_WEATHER_API_KEY = name;
     }
 
     // Current weather data API call uses lon and lat data
@@ -33,7 +33,7 @@ public class HttpService {
         JsonNode weatherData = JsonNodeFactory.instance.objectNode();
 
         final String WEATHERDATA_URL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon
-                + "&appid=" + API_KEY;
+                + "&appid=" + OPEN_WEATHER_API_KEY;
 
         // https://www.baeldung.com/java-9-http-client
         // https://www.baeldung.com/java-uri-create-and-new-uri
