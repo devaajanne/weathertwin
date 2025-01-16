@@ -19,9 +19,6 @@ As a result, the endpoint retuns the weather for the input location as well as t
 
 ### Weather data (/api/weatherdata)
 
-<details>
-<summary>Click for details</summary>
-
 **URL** : `/api/weatherdata`
 
 **Method** : `POST`
@@ -55,13 +52,13 @@ The request body should be a JSON object. It must include the following fields:
 }
 ```
 
-### Success reponse
+### Success reponses
 
-**Condition** : Data provided in the body is valid.
+**Condition** : Data provided in the body is valid and a similar location has been found.
 
 **Code** : `200 OK`
 
-**Content example** : Returns a JSON object with two properties: `inputLocation` and `similarLocation`.
+**Content example** : Returns a JSON object with two properties: `inputLocation` and `similarLocation`. Both include the weather data for their respective locations. `temp` is in the unit given in the body.
 
 ```json
 {
@@ -71,6 +68,7 @@ The request body should be a JSON object. It must include the following fields:
     "lon": 50.121,
     "city": "Fareydūnshahr",
     "countryCode": "IR",
+    "countryName": "Iran",
     "weatherGroup": "Clouds",
     "temp": -5.6
   },
@@ -80,10 +78,30 @@ The request body should be a JSON object. It must include the following fields:
     "lon": 24.9427,
     "city": "Helsinki",
     "countryCode": "FI",
+    "countryName": "Finland",
     "weatherGroup": "Clouds",
     "temp": -5.4
   }
 }
 ```
+**Condition** : Data provided in the body is valid but a similar location has not been found.
 
-</details>
+**Code** : `200 OK`
+
+**Content example** : Returns a JSON object with two properties: `inputLocation` and `similarLocation`. Only the `inputLocation` contains its respective weather data, whereas `similarLocation` is `null`. `temp` is in the unit given in the body.
+
+```json
+{
+  "similarLocation": null,
+  "inputLocation": {
+    "id": 658225,
+    "lat": 60.1675,
+    "lon": 24.9427,
+    "city": "Helsinki",
+    "countryCode": "FI",
+    "countryName": "Finland",
+    "weatherGroup": "Clouds",
+    "temp": -5.4
+  }
+}
+```
