@@ -1,8 +1,13 @@
 package app.weathertwin.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import app.weathertwin.entity.WeatherData;
 import app.weathertwin.repository.WeatherDataRepository;
@@ -35,5 +40,20 @@ public class QueryService {
                 maxLat,
                 weatherGroup,
                 id);
+    }
+
+    public String findCountryNameByCountryCode(String countryCode) {
+        String countryName = countryCode;
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            File countryCodesAndNamesFile = new File("src\\main\\resources\\ISO3166_CountryCodesAndNames.json");
+            JsonNode rootNode = objectMapper.readTree(countryCodesAndNamesFile);
+            countryName = rootNode.get(countryCode).asText();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+        return countryName;
     }
 }
