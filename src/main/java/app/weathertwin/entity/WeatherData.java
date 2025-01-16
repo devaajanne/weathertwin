@@ -13,7 +13,7 @@ public class WeatherData {
     Long id;
 
     Double lat, lon;
-    String city, countryCode;
+    String city, countryCode, countryName;
 
     @Column(name = "weather_group")
     String weatherGroup;
@@ -23,13 +23,14 @@ public class WeatherData {
     public WeatherData() {
     }
 
-    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, Double temp,
+    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, String countryName, Double temp,
             String weatherGroup) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
         this.city = city;
         this.countryCode = countryCode;
+        this.countryName = countryName;
         this.temp = temp;
         this.weatherGroup = weatherGroup;
     }
@@ -99,6 +100,19 @@ public class WeatherData {
         return this;
     }
 
+    public String getCountryName() {
+        return this.countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public WeatherData countryName(String countryName) {
+        setCountryName(countryName);
+        return this;
+    }
+
     public String getWeatherGroup() {
         return this.weatherGroup;
     }
@@ -133,6 +147,7 @@ public class WeatherData {
                 ", lon='" + getLon() + "'" +
                 ", city='" + getCity() + "'" +
                 ", countryCode='" + getCountryCode() + "'" +
+                ", countryName='" + getCountryName() + "'" +
                 ", weatherGroup='" + getWeatherGroup() + "'" +
                 ", temp='" + getTemp() + "'" +
                 "}";
