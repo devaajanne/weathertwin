@@ -2,9 +2,12 @@
 
 Weather Twin a fun, silly little app to find which city in the world has the same weather as your location.
 
-The JSON file of cities with their latitudes and longitudes has been created with AI. The base for the file has been this GitHub repository by lmfmaier: https://github.com/lmfmaier/cities-json
-
 This is the repository for the server-side application. For the client-side repository, see here: https://github.com/devaajanne/weathertwin-client.
+
+The JSON files of cities with their latitudes and longitudes as well as of countries and their country codes have been created with AI. The base for the files have been these two GitHub repositories:
+
+- cities-json by lmfmaier: https://github.com/lmfmaier/cities-json
+- ISO-3166-Countries-with-Regional-Codes by lukes: https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes
 
 ## API documentation
 
