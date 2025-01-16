@@ -29,28 +29,31 @@ public class WeathertwinController {
     @PostMapping("/weatherdata")
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {
         HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
-        
+
         JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(
                 requestBody.get("cityCoords").get("lat").asDouble(),
                 requestBody.get("cityCoords").get("lon").asDouble());
-        
+
         String targetUnit = requestBody.get("unit").asText();
 
         WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
-        inputLocationData.setCity((requestBody.get("cityName").asText().split(","))[0]);
-
         List<WeatherData> similarWeatherDataList = queryService.findSimilarWeatherDataFromrepository(inputLocationData);
 
-        Random random = new Random();
-
+        inputLocationData.setCity((requestBody.get("cityName").asText().split(","))[0]);
+        inputLocationData.setCountryName(queryService.findCountryNameByCountryCode(inputLocationData.getCountryCode()));
         returnedMap.put("inputLocation", ConversionService.convertTemp(inputLocationData, targetUnit));
+
+        Random random = new Random();
 
         if (similarWeatherDataList.size() == 0) {
             returnedMap.put("similarLocation", null);
         } else {
-            returnedMap.put("similarLocation", ConversionService.convertTemp(
-                    similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size())), targetUnit));
+            WeatherData similarLocationData = similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size()));
+            similarLocationData
+                    .setCountryName(queryService.findCountryNameByCountryCode(similarLocationData.getCountryCode()));
+            returnedMap.put("similarLocation", ConversionService.convertTemp(similarLocationData, targetUnit));
         }
+
 
         return returnedMap;
     }
