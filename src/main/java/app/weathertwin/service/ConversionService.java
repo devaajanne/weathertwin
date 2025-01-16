@@ -35,6 +35,7 @@ public class ConversionService {
         weatherData.setLon(cityWeatherDataJSON.get("coord").get("lon").asDouble());
         weatherData.setCity(cityWeatherDataJSON.get("name").asText());
         weatherData.setCountryCode(cityWeatherDataJSON.get("sys").get("country").asText());
+        weatherData.setCountryName(null);
         weatherData.setTemp(cityWeatherDataJSON.get("main").get("temp").asDouble());
         weatherData.setWeatherGroup(cityWeatherDataJSON.get("weather").get(0).get("main").asText());
 
