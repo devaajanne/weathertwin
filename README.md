@@ -4,6 +4,8 @@ Weather Twin a fun, silly little app to find which city in the world has the sam
 
 The JSON file of cities with their latitudes and longitudes has been created with AI. The base for the file has been this GitHub repository by lmfmaier: https://github.com/lmfmaier/cities-json
 
+This is the repository for the server-side application. For the client-side repository, see here: https://github.com/devaajanne/weathertwin-client.
+
 ## API documentation
 
 The app provides one endpoint, api/weatherdata.
