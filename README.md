@@ -6,7 +6,11 @@ The JSON file of cities with their latitudes and longitudes has been created wit
 
 ## API documentation
 
-The app provides one endpoint, api/weatherdata. This endpoint does not require authentication or authorization. The endpoint allows fetching weather data for the input location, and querying the repository for a similar weather data.
+The app provides one endpoint, api/weatherdata.
+
+The endpoint allows fetching weather data for the input location, and querying the repository for a similar weather data. This endpoint does not require authentication or authorization.
+
+As a result, the endpoint retuns the weather for the input location as well as the weather for a location that has a similar weather .
 
 ### Weather data (/api/weatherdata)
 
@@ -25,10 +29,11 @@ The app provides one endpoint, api/weatherdata. This endpoint does not require a
 
 The request body should be a JSON object. It must include the following fields:
 
-| Field  | Type   | Required | Description                                                              |
-| ------ | ------ | -------- | ------------------------------------------------------------------------ |
-| `city` | String | YES      | The name of the input city .                                             |
-| `unit` | String | YES      | Response unit. Must be `standard`/`null`/empty, `metric`, or `imperial`. |
+| Field        | Type   | Required | Description                                                                                        |
+| ------------ | ------ | -------- | -------------------------------------------------------------------------------------------------- |
+| `cityName`   | String | YES      | The name of the input city. Can include the city's country, separated by comma.                    |
+| `cityCoords` | JSON   | YES      | The coordinates of the city. Must include `lat` and `lon` fields and their values as float/double. |
+| `unit`       | String | YES      | Response unit. Must be `standard`/`null`/empty, `metric`, or `imperial`.                           |
 
 #### Example request
 
@@ -36,7 +41,11 @@ The request body should be a JSON object. It must include the following fields:
 
 ```json
 {
-  "city": "Helsinki",
+  "cityName": "Helsinki, Finland",
+  "cityCoords": {
+    "lat": 60.1675,
+    "lon": 24.9427
+  },
   "unit": "metric"
 }
 ```
