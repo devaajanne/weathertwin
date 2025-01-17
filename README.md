@@ -4,11 +4,6 @@ Weather Twin a fun, silly little app to find which city in the world has the sam
 
 This is the repository for the server-side application. For the client-side repository, see here: https://github.com/devaajanne/weathertwin-client.
 
-The JSON files of cities with their latitudes and longitudes as well as of countries and their country codes have been created with AI. The base for the files have been these two GitHub repositories:
-
-- cities-json by lmfmaier: https://github.com/lmfmaier/cities-json
-- ISO-3166-Countries-with-Regional-Codes by lukes: https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes
-
 ## API documentation
 
 The app provides one endpoint, api/weatherdata.
@@ -105,3 +100,18 @@ The request body should be a JSON object. It must include the following fields:
   }
 }
 ```
+
+### License
+
+There are two JSON files of used in this application:
+
+- ISO3166_CountryCodesAndNames.json
+- citiesLatsAndLons.json
+
+These files are located in `src/main/resources`. These have been created with the help of AI. The base for the files have been JSON files found in these two GitHub repositories:
+
+- cities-json by lmfmaier: https://github.com/lmfmaier/cities-json
+- ISO-3166-Countries-with-Regional-Codes by lukes: https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes
+
+As their works have been licenced with Creative Commons 4.0 license, the JSON files in this repository have also been licensed under Creative Commonce 4.0 license: https://creativecommons.org/licenses/by-sa/4.0/
+
