@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Profile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +27,7 @@ public class WeathertwinApplication {
 	}
 
 	@Bean
+	@Profile("!test") // does not run if test profile is active
 	public CommandLineRunner weatherTwinCLR(WeatherDataRepository weatherDataRepository) {
 		return (args) -> {
 
