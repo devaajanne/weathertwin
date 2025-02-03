@@ -10,9 +10,11 @@ The app provides one endpoint, api/weatherdata.
 
 The endpoint allows fetching weather data for the input location, and querying the repository for a similar weather data. This endpoint does not require authentication or authorization.
 
-As a result, the endpoint retuns the weather for the input location as well as the weather for a location that has a similar weather .
+As a result, the endpoint retuns the weather for the input location as well as the weather for a location that has a similar weather.
 
 ### Weather data (/api/weatherdata)
+<details>
+<summary>Click to see detailed API documentation</summary>
 
 **URL** : `/api/weatherdata`
 
@@ -100,8 +102,24 @@ The request body should be a JSON object. It must include the following fields:
   }
 }
 ```
+</details>
 
-### License
+## Q&A
+
+Click on the questions to see the answers.
+
+<details>
+<summary>What are the technologies used in the project?</summary>
+This repository houses the back-end side of the WeatherTwin application. It has been written in Java version 23, using Spring Boot version 3.4.2 and Gradle version 8.11.1. For reading JSON files, Jackson library is used. For the front-end side of the project, written in JavaScript and React, see this repository: https://github.com/devaajanne/weathertwin-client
+</details>
+
+
+<details>
+<summary>Why do you use a runtime database and not a persistent database?</summary>
+This is most likely a temporary solution and fixed later, but the main reason was that this application features only one table: weatherdatatable. This is the table that is used to store fetched weather data from OpenWeatherMap API which has been converted into weatherData entities. As this is the only table in the whole application, and as the data in the table is updated every hour (ie. the weather data gets outdated fast, since weather changes), a runtime database with H2 is good for now.
+</details>
+
+## License
 
 There are two JSON files of used in this application:
 
