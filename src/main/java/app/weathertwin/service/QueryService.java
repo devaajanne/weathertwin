@@ -2,6 +2,7 @@ package app.weathertwin.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -66,8 +67,9 @@ public class QueryService {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            File countryCodesAndNamesFile = new File("src\\main\\resources\\ISO3166_CountryCodesAndNames.json");
-            JsonNode rootNode = objectMapper.readTree(countryCodesAndNamesFile);
+            InputStream countryCodesAndNamesStream = getClass()
+                    .getResourceAsStream("/ISO3166_CountryCodesAndNames.json");
+            JsonNode rootNode = objectMapper.readTree(countryCodesAndNamesStream);
             countryName = rootNode.get(countryCode).asText();
         } catch (IOException exception) {
             exception.printStackTrace();

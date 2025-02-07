@@ -1,6 +1,7 @@
 package app.weathertwin;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.boot.CommandLineRunner;
@@ -19,6 +20,7 @@ import app.weathertwin.service.ConversionService;
 import app.weathertwin.service.HttpService;
 
 @SpringBootApplication
+//@PropertySource("classpath:application-dev.properties")
 public class WeathertwinApplication {
 
 	public static void main(String[] args) {
@@ -34,8 +36,8 @@ public class WeathertwinApplication {
 
 			/* Source: https://www.baeldung.com/jackson-object-mapper-tutorial */
 			ObjectMapper objectMapper = new ObjectMapper();
-			File latsAndLonsFile = new File("src\\main\\resources\\citiesLatsAndLons.json");
-			JsonNode rootNode = objectMapper.readValue(latsAndLonsFile, JsonNode.class);
+			InputStream cityCoordStream = getClass().getResourceAsStream("/citiesLatsAndLons.json");
+			JsonNode rootNode = objectMapper.readValue(cityCoordStream, JsonNode.class);
 
 			/* Here we start fetching weather data into our database */
 			while (true) {
