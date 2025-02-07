@@ -17,7 +17,7 @@ import app.weathertwin.service.ConversionService;
 import app.weathertwin.service.QueryService;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class WeathertwinController {
 
     private final QueryService queryService;
