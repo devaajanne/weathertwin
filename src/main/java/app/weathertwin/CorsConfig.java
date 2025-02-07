@@ -20,10 +20,10 @@ public class CorsConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOrigins(List.of("https://devaajanne.github.io"));
         corsConfig.setAllowedMethods(List.of("POST", "OPTIONS")); // OPTIONS is needed due to pre-flight
-        corsConfig.setAllowedHeaders(List.of("Content-Type", "Accept"));
+        corsConfig.setAllowedHeaders(List.of("Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/weatherdata", corsConfig);
+        source.registerCorsConfiguration("/**", corsConfig);
 
         return source;
     }
