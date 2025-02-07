@@ -19,7 +19,6 @@ import app.weathertwin.service.ConversionService;
 import app.weathertwin.service.HttpService;
 
 @SpringBootApplication
-@PropertySource("classpath:application-dev.properties")
 public class WeathertwinApplication {
 
 	public static void main(String[] args) {
