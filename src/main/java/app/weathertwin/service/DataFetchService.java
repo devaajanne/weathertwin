@@ -2,7 +2,6 @@ package app.weathertwin.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
