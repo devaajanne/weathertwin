@@ -21,14 +21,28 @@ public class QueryService {
         this.weatherDataRepository = weatherDataRepository;
     }
 
+    /* Here we set our search criteria */
     public List<WeatherData> findSimilarWeatherDataFromrepository(WeatherData inputWeatherData) {
+        /*
+         * Input and similar location temperatures must be no more than 1 kelvin from
+         * one another
+         */
         Double minTemp = inputWeatherData.getTemp() - 0.5;
         Double maxTemp = inputWeatherData.getTemp() + 0.5;
+
+        /* Input and similar locations must have enough distance between them */
         Double minLon = inputWeatherData.getLon() - 10.0;
         Double maxLon = inputWeatherData.getLon() + 10.0;
         Double minLat = inputWeatherData.getLat() - 10.0;
         Double maxLat = inputWeatherData.getLat() + 10.0;
+
+        /*
+         * Input and similar locations must have a similar kind of weather (ie. sunny,
+         * rainy, cloudy etc.)
+         */
         String weatherGroup = inputWeatherData.getWeatherGroup();
+
+        /* Id is used to exclude the input location from query results */
         Long id = inputWeatherData.getId();
 
         return weatherDataRepository.findWeatherDataThatMeetsConditions(
@@ -42,6 +56,11 @@ public class QueryService {
                 id);
     }
 
+    /*
+     * By default, we store WeatherData objects with the country code and without
+     * the country name. Only when the objects are sent to the client do we set the
+     * country name based on the country code. This makes the app run more smootly.
+     */
     public String findCountryNameByCountryCode(String countryCode) {
         String countryName = countryCode;
 

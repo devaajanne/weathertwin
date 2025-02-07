@@ -11,6 +11,12 @@ import app.weathertwin.entity.WeatherData;
 @SpringBootTest(properties = "spring.profiles.active=test")
 public class ConversionTests {
 
+    /*
+     * By default, the OpenWeatherMap API returns us standard (kelvin) units. Here
+     * we test that the temperature unit conversions work properly, ie. standard ->
+     * metric (celsius) and standard -> imperial (fahrenheit)
+     */
+
     @Test
     public void testStandardToMetricConversion() {
         Double standardTemp = 274.15;

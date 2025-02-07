@@ -9,21 +9,32 @@ import jakarta.persistence.Table;
 @Table(name = "weatherdatatable")
 public class WeatherData {
 
+    /*
+     * Here we se the attributes that we need for our WeatherData objects. The
+     * OpenWeatherMap API returns more data as JSON, but there are the things we for
+     * our application
+     */
     @Id
     Long id;
 
     Double lat, lon;
     String city, countryCode, countryName;
 
+    /*
+     * Column name is set here because this column is used in the SQL query, so the
+     * column name must be given in snake_case
+     */
     @Column(name = "weather_group")
     String weatherGroup;
-    
+
     Double temp;
 
+    /* No-arg and arg constructors */
     public WeatherData() {
     }
 
-    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, String countryName, Double temp,
+    public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, String countryName,
+            Double temp,
             String weatherGroup) {
         this.id = id;
         this.lat = lat;
@@ -35,6 +46,7 @@ public class WeatherData {
         this.weatherGroup = weatherGroup;
     }
 
+    /* Getters and setters */
     public Long getId() {
         return this.id;
     }
@@ -139,6 +151,7 @@ public class WeatherData {
         return this;
     }
 
+    /* Finally, toString() method */
     @Override
     public String toString() {
         return "{" +

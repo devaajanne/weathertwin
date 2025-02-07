@@ -26,25 +26,63 @@ public class WeathertwinController {
         this.queryService = queryService;
     }
 
+    /*
+     * The application has only one API endpoint. This endpoint receives the user's
+     * inputs from the client, and returns
+     * 1) user's input location's weather data and
+     * 2) weather data for a similar location.
+     * User's unit input (metric/imperial) is taken into account
+     */
     @PostMapping("/weatherdata")
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {
+        /*
+         * We initialize a new HashMap to store
+         * 1) user's input location's weather data and
+         * 2) a similar location's weather data
+         * This map is returned to the client.
+         * We also store the user's selected unit (metric/imperial) in to variable
+         */
         HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
+        String targetUnit = requestBody.get("unit").asText();
 
+        /*
+         * We first find the weather data for the user's input location and convert JSON
+         * data from OpenWeatherMap API into a WeatherData object.
+         */
         JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(
                 requestBody.get("cityCoords").get("lat").asDouble(),
                 requestBody.get("cityCoords").get("lon").asDouble());
-
-        String targetUnit = requestBody.get("unit").asText();
-
         WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
+
+        /*
+         * Then we collect locations with similar weather to a list using our SQL query
+         */
         List<WeatherData> similarWeatherDataList = queryService.findSimilarWeatherDataFromrepository(inputLocationData);
 
+        /*
+         * By default, the client sends the input location's city's name in the request
+         * body, so we set this as the WeatherData object's cityName. This is because
+         * sometimes, OpenWeatherMap API gets the city names wrong for locations that
+         * are found with lat and lon data. We also set the correct country name based
+         * on the country code, and store the input location's weather data into the map
+         * that we will return to the client
+         */
         inputLocationData.setCity((requestBody.get("cityName").asText().split(","))[0]);
         inputLocationData.setCountryName(queryService.findCountryNameByCountryCode(inputLocationData.getCountryCode()));
         returnedMap.put("inputLocation", ConversionService.convertTemp(inputLocationData, targetUnit));
 
+        /*
+         * Random is initialized because we want to get a random location from the list
+         * of similar locations
+         */
         Random random = new Random();
 
+        /*
+         * If no similar weather locations are found, we store the value "null" as the
+         * similar location's weather data in to the returned map.
+         * If similar weather locations are found, we select a random location, set the
+         * correct country name and temperature unit and store it into the returned map
+         */
         if (similarWeatherDataList.size() == 0) {
             returnedMap.put("similarLocation", null);
         } else {
@@ -54,7 +92,10 @@ public class WeathertwinController {
             returnedMap.put("similarLocation", ConversionService.convertTemp(similarLocationData, targetUnit));
         }
 
-
+        /*
+         * Finally, we return the HashMap with the input and similar locations' weather
+         * data to the client
+         */
         return returnedMap;
     }
 }
