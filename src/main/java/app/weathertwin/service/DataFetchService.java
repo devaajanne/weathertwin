@@ -53,7 +53,6 @@ public class DataFetchService {
 
                 weatherDataRepository.save(weatherData);
                 System.out.println("City nro " + (i + 1));
-
             }
         } catch (IOException exception) {
             exception.printStackTrace();

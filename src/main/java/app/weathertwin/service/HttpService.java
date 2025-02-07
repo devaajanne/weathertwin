@@ -2,6 +2,7 @@ package app.weathertwin.service;
 
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
 import java.net.http.HttpClient;
 import java.net.URI;
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class HttpService {
     public void setStaticName(String name) {
         OPEN_WEATHER_API_KEY = name;
     }
+
+    private static final HttpClient client = HttpClient.newHttpClient();
 
     /*
      * This method fetches weather data from OpenWeatherMap. Current weather data
@@ -58,14 +61,16 @@ public class HttpService {
          * an exception, stack trace is printed
          */
         try {
-            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest,
+            CompletableFuture<HttpResponse<String>> futureResponse = client.sendAsync(httpRequest,
                     HttpResponse.BodyHandlers.ofString());
+
+            HttpResponse<String> response = futureResponse.join();
 
             /* Source: https://www.baeldung.com/jackson-object-mapper-tutorial */
             ObjectMapper objectMapper = new ObjectMapper();
             weatherData = objectMapper.readTree(response.body());
 
-        } catch (IOException | InterruptedException exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
 
