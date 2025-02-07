@@ -23,7 +23,7 @@ public class DataFetchService {
         this.weatherDataRepository = weatherDataRepository;
     }
 
-    @Scheduled(fixedDelay = 60_0000)
+    @Scheduled(fixedRate = 3_600_000)
     public void fetchDataPeriodicallyFromAPI() {
         try {
             /* Source: https://www.baeldung.com/jackson-object-mapper-tutorial */
@@ -31,31 +31,29 @@ public class DataFetchService {
             InputStream cityCoordStream = getClass().getResourceAsStream("/citiesLatsAndLons.json");
             JsonNode rootNode = objectMapper.readValue(cityCoordStream, JsonNode.class);
 
-            /* Here we start fetching weather data into our database */
-            while (true) {
+            /* We start looping the city data in the JSON file */
+            for (int i = 0; i < rootNode.size(); i++) {
 
-                /* We start looping the city data in the JSON file */
-                for (int i = 0; i < rootNode.size(); i++) {
+                /* Here we set the lat and lon values for the http request */
+                Double lat = rootNode.get(i).get("coords").get("lat").asDouble();
+                Double lon = rootNode.get(i).get("coords").get("lon").asDouble();
 
-                    /* Here we set the lat and lon values for the http request */
-                    Double lat = rootNode.get(i).get("coords").get("lat").asDouble();
-                    Double lon = rootNode.get(i).get("coords").get("lon").asDouble();
+                /*
+                 * We convert the fetched JSON data to a WeatherData object because the API
+                 * returns a lot more information than we actually need for our needs
+                 */
+                JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
+                WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
 
-                    /*
-                     * We convert the fetched JSON data to a WeatherData object because the API
-                     * returns a lot more information than we actually need for our needs
-                     */
-                    JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
-                    WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
+                /*
+                 * Here we set the weather data object's city attribute from the JSON file. This
+                 * is because the weather API does not always return the correct city name
+                 */
+                weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
 
-                    /*
-                     * Here we set the weather data object's city attribute from the JSON file. This
-                     * is because the weather API does not always return the correct city name
-                     */
-                    weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
+                weatherDataRepository.save(weatherData);
+                System.out.println("City nro " + (i + 1));
 
-                    weatherDataRepository.save(weatherData);
-                }
             }
         } catch (IOException exception) {
             exception.printStackTrace();
