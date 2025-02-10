@@ -34,6 +34,14 @@ public class DataFetchService {
             /* We start looping the city data in the JSON file */
             for (int i = 0; i < rootNode.size(); i++) {
 
+                /*
+                 * OpenWeatherMap API has a limit of 60 requests per minute on the tier used in
+                 * this application. We slow down own own API fetches by including a sleep
+                 * period of 1,5 seconds between the calls so that our API key does not get
+                 * blocked
+                 */
+                Thread.sleep(1500);
+
                 /* Here we set the lat and lon values for the http request */
                 Double lat = rootNode.get(i).get("coords").get("lat").asDouble();
                 Double lon = rootNode.get(i).get("coords").get("lon").asDouble();
@@ -54,7 +62,7 @@ public class DataFetchService {
                 weatherDataRepository.save(weatherData);
                 System.out.println("City nro " + (i + 1));
             }
-        } catch (IOException exception) {
+        } catch (InterruptedException | IOException exception) {
             exception.printStackTrace();
         }
     }
