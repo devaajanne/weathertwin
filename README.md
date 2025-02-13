@@ -4,6 +4,10 @@ Weather Twin a fun, silly little app to find which city in the world has the sam
 
 This is the repository for the server-side application. For the client-side repository, see here: https://github.com/devaajanne/weathertwin-client.
 
+## Deployment
+
+Weather Twin is now live at GitHub pages! See the app here: https://devaajanne.github.io/weathertwin-client/
+
 ## API documentation
 
 The app provides one endpoint, api/weatherdata.
