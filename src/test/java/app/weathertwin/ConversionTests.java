@@ -35,7 +35,7 @@ public class ConversionTests {
 
     @Test
     public void testWeatherDataTempConversionToMetric() {
-        WeatherData weatherData = new WeatherData(1L, 25.55, 25.66, "Helsinki", "FI", "Finland", 274.15, null, "Snow");
+        WeatherData weatherData = new WeatherData(1L, 25.55, 25.66, "Helsinki", "FI", "Finland", 274.15, null, "Snow", "13d");
         Double metricTemp = 1.0;
 
         WeatherData newWeatherData = ConversionService.convertTemp(weatherData, "metric");
@@ -45,7 +45,7 @@ public class ConversionTests {
 
     @Test
     public void testWeatherDataTempConversionToImperial() {
-        WeatherData weatherData = new WeatherData(1L, 25.55, 25.66, "Helsinki", "FI", "Finland", 255.93, null, "Snow");
+        WeatherData weatherData = new WeatherData(1L, 25.55, 25.66, "Helsinki", "FI", "Finland", 255.93, null, "Snow", "13d");
         Double imperialTemp = 1.0;
 
         WeatherData newWeatherData = ConversionService.convertTemp(weatherData, "imperial");
