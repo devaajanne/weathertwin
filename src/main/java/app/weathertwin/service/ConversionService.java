@@ -47,7 +47,8 @@ public class ConversionService {
          * We find the data we need in the JSON weather data and set a WeatherData
          * object with corresponding attributes. Country name is not provided by the
          * API, and we set it to null for now. The country name will be se only if this
-         * particular WeatherData object is selected to be returned to the client
+         * particular WeatherData object is selected to be returned to the client. Also,
+         * temp unit will be set later if the location is returned to the client.
          */
         weatherData.setId(cityWeatherDataJSON.get("id").asLong());
         weatherData.setLat(cityWeatherDataJSON.get("coord").get("lat").asDouble());
@@ -56,6 +57,7 @@ public class ConversionService {
         weatherData.setCountryCode(cityWeatherDataJSON.get("sys").get("country").asText());
         weatherData.setCountryName(null);
         weatherData.setTemp(cityWeatherDataJSON.get("main").get("temp").asDouble());
+        weatherData.setTempUnit(null);
         weatherData.setWeatherGroup(cityWeatherDataJSON.get("weather").get(0).get("main").asText());
 
         return weatherData;
@@ -63,9 +65,9 @@ public class ConversionService {
 
     /*
      * By default, we save WeatherData objects with standard (kelvin) temperatures
-     * into the database. The temperature unit will be converted according to what
+     * into the database. The temperature will be converted according to what unit
      * the user selected in the client when a WeatherData object is sent to the
-     * client
+     * client. We also set the unit's symbol (°C or °F) according to the unit.
      */
     public static WeatherData convertTemp(WeatherData weatherData, String unit) {
 
@@ -76,10 +78,12 @@ public class ConversionService {
 
         if (unit != null && unit.equals("metric")) {
             weatherData.setTemp(tempStandardToMetric(weatherData.getTemp()));
+            weatherData.setTempUnit("°C");
         }
 
         if (unit != null && unit.equals("imperial")) {
             weatherData.setTemp(tempStandardToImperial(weatherData.getTemp()));
+            weatherData.setTempUnit("°F");
         }
 
         return weatherData;

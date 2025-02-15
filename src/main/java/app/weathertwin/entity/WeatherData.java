@@ -17,8 +17,8 @@ public class WeatherData {
     @Id
     Long id;
 
-    Double lat, lon;
-    String city, countryCode, countryName;
+    Double lat, lon, temp;
+    String city, countryCode, countryName, tempUnit;
 
     /*
      * Column name is set here because this column is used in the SQL query, so the
@@ -27,15 +27,12 @@ public class WeatherData {
     @Column(name = "weather_group")
     String weatherGroup;
 
-    Double temp;
-
     /* No-arg and arg constructors */
     public WeatherData() {
     }
 
     public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, String countryName,
-            Double temp,
-            String weatherGroup) {
+            Double temp, String tempUnit, String weatherGroup) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
@@ -43,6 +40,7 @@ public class WeatherData {
         this.countryCode = countryCode;
         this.countryName = countryName;
         this.temp = temp;
+        this.tempUnit = tempUnit;
         this.weatherGroup = weatherGroup;
     }
 
@@ -86,6 +84,19 @@ public class WeatherData {
         return this;
     }
 
+    public Double getTemp() {
+        return this.temp;
+    }
+
+    public void setTemp(Double temp) {
+        this.temp = temp;
+    }
+
+    public WeatherData temp(Double temp) {
+        setTemp(temp);
+        return this;
+    }
+
     public String getCity() {
         return this.city;
     }
@@ -125,6 +136,19 @@ public class WeatherData {
         return this;
     }
 
+    public String getTempUnit() {
+        return this.tempUnit;
+    }
+
+    public void setTempUnit(String tempUnit) {
+        this.tempUnit = tempUnit;
+    }
+
+    public WeatherData tempUnit(String tempUnit) {
+        setTempUnit(tempUnit);
+        return this;
+    }
+
     public String getWeatherGroup() {
         return this.weatherGroup;
     }
@@ -138,19 +162,6 @@ public class WeatherData {
         return this;
     }
 
-    public Double getTemp() {
-        return this.temp;
-    }
-
-    public void setTemp(Double temp) {
-        this.temp = temp;
-    }
-
-    public WeatherData temp(Double temp) {
-        setTemp(temp);
-        return this;
-    }
-
     /* Finally, toString() method */
     @Override
     public String toString() {
@@ -158,11 +169,12 @@ public class WeatherData {
                 " id='" + getId() + "'" +
                 ", lat='" + getLat() + "'" +
                 ", lon='" + getLon() + "'" +
+                ", temp='" + getTemp() + "'" +
                 ", city='" + getCity() + "'" +
                 ", countryCode='" + getCountryCode() + "'" +
                 ", countryName='" + getCountryName() + "'" +
+                ", tempUnit='" + getTempUnit() + "'" +
                 ", weatherGroup='" + getWeatherGroup() + "'" +
-                ", temp='" + getTemp() + "'" +
                 "}";
     }
 }
