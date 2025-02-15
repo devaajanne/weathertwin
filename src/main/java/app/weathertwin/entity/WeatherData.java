@@ -18,7 +18,7 @@ public class WeatherData {
     Long id;
 
     Double lat, lon, temp;
-    String city, countryCode, countryName, tempUnit;
+    String city, countryCode, countryName, tempUnit, weatherIcon;
 
     /*
      * Column name is set here because this column is used in the SQL query, so the
@@ -32,7 +32,7 @@ public class WeatherData {
     }
 
     public WeatherData(Long id, Double lat, Double lon, String city, String countryCode, String countryName,
-            Double temp, String tempUnit, String weatherGroup) {
+            Double temp, String tempUnit, String weatherGroup, String weatherIcon) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
@@ -42,9 +42,11 @@ public class WeatherData {
         this.temp = temp;
         this.tempUnit = tempUnit;
         this.weatherGroup = weatherGroup;
+        this.weatherIcon = weatherIcon;
     }
 
     /* Getters and setters */
+
     public Long getId() {
         return this.id;
     }
@@ -149,6 +151,19 @@ public class WeatherData {
         return this;
     }
 
+    public String getWeatherIcon() {
+        return this.weatherIcon;
+    }
+
+    public void setWeatherIcon(String weatherIcon) {
+        this.weatherIcon = weatherIcon;
+    }
+
+    public WeatherData weatherIcon(String weatherIcon) {
+        setWeatherIcon(weatherIcon);
+        return this;
+    }
+
     public String getWeatherGroup() {
         return this.weatherGroup;
     }
@@ -174,6 +189,7 @@ public class WeatherData {
                 ", countryCode='" + getCountryCode() + "'" +
                 ", countryName='" + getCountryName() + "'" +
                 ", tempUnit='" + getTempUnit() + "'" +
+                ", weatherIcon='" + getWeatherIcon() + "'" +
                 ", weatherGroup='" + getWeatherGroup() + "'" +
                 "}";
     }

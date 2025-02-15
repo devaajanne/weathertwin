@@ -59,6 +59,7 @@ public class ConversionService {
         weatherData.setTemp(cityWeatherDataJSON.get("main").get("temp").asDouble());
         weatherData.setTempUnit(null);
         weatherData.setWeatherGroup(cityWeatherDataJSON.get("weather").get(0).get("main").asText());
+        weatherData.setWeatherIcon(cityWeatherDataJSON.get("weather").get(0).get("icon").asText());
 
         return weatherData;
     }
