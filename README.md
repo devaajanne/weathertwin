@@ -113,14 +113,18 @@ The request body should be a JSON object. It must include the following fields:
 Click on the questions to see the answers.
 
 <details>
-<summary>What are the technologies used in the project?</summary>
-This repository houses the back-end side of the WeatherTwin application. It has been written in Java version 23, using Spring Boot version 3.4.2 and Gradle version 8.11.1. For reading JSON files, Jackson library is used. For the front-end side of the project, written in JavaScript and React, see this repository: https://github.com/devaajanne/weathertwin-client
+<summary>Why did you decide to create this application?</summary>
+This was a training / hobby project. I wanted to learn more about back and front end development and deepen my knowledge about the technologies used in the project. I also wanted to create an application that requires no log-in so that the app is simple, easy to use, and hopefully fun as well!
 </details>
 
+<details>
+<summary>What are the technologies used in the project?</summary>
+This repository houses the back-end side of the WeatherTwin application. It has been written in Java version 23, using Spring Boot version 3.4.2 and Gradle version 8.11.1. Database has been created with PostgreSQL with database migration with Liquibase. For reading JSON files, Jackson library is used. For the front-end side of the project, written in JavaScript and React, see this repository: https://github.com/devaajanne/weathertwin-client
+</details>
 
 <details>
-<summary>Why do you use a runtime database and not a persistent database?</summary>
-This is most likely a temporary solution and fixed later, but the main reason was that this application features only one table: weatherdatatable. This is the table that is used to store fetched weather data from OpenWeatherMap API which has been converted into weatherData entities. As this is the only table in the whole application, and as the data in the table is updated every hour (ie. the weather data gets outdated fast, since weather changes), a runtime database with H2 is good for now.
+<summary>Your app is down! How can I let you know?</summary>
+Contact me through LinkedIn (<a href="https://www.linkedin.com/in/janair/">https://www.linkedin.com/in/janair/</a>) or send me an email at janne.airaksinen.mail(at)gmail.com. Thanks!
 </details>
 
 ## License
