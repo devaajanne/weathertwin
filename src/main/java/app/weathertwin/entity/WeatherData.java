@@ -12,20 +12,35 @@ public class WeatherData {
     /*
      * Here we se the attributes that we need for our WeatherData objects. The
      * OpenWeatherMap API returns more data as JSON, but there are the things we for
-     * our application
+     * our application.
+     * 
+     * Some column names are set here because we use an external PostgreSQL
+     * database, so the column names must be given in snake_case.
      */
+
     @Id
     Long id;
 
-    Double lat, lon, temp;
-    String city, countryCode, countryName, tempUnit, weatherIcon;
+    Double lat;
+    Double lon;
+    String city;
 
-    /*
-     * Column name is set here because this column is used in the SQL query, so the
-     * column name must be given in snake_case
-     */
+    @Column(name = "country_code")
+    String countryCode;
+
+    @Column(name = "country_name")
+    String countryName;
+
+    Double temp;
+
+    @Column(name = "temp_unit")
+    String tempUnit;
+
     @Column(name = "weather_group")
     String weatherGroup;
+
+    @Column(name = "weather_icon")
+    String weatherIcon;
 
     /* No-arg and arg constructors */
     public WeatherData() {
