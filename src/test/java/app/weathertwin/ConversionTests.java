@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import app.weathertwin.service.ConversionService;
 import app.weathertwin.entity.WeatherData;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * Tests for validating the temperature conversion methods in ConversionService.
@@ -14,7 +15,8 @@ import app.weathertwin.entity.WeatherData;
  * that the conversion methods correctly convert temperatures to metric (Celsius) and imperial (Fahrenheit)
  * units. The tests run under the "test" profile.
  */
-@SpringBootTest(properties = "spring.profiles.active=test")
+@SpringBootTest
+@ActiveProfiles("test")
 public class ConversionTests {
 
     /**

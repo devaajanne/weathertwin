@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
  * This is a service class to hold a method for making an API call to fetch weather data as a JSON object from the API.
  */
 @Service
+@Profile("!test")
 public class HttpService {
 
     /*
