@@ -12,8 +12,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+/**
+ * This is a service class to hold a method for making an API call to fetch weather data as a JSON object from the API.
+ */
 @Service
 public class HttpService {
 
@@ -31,17 +35,20 @@ public class HttpService {
 
     private static final HttpClient client = HttpClient.newHttpClient();
 
-    /*
+    /**
      * This method fetches weather data from OpenWeatherMap. Current weather data
-     * API call uses lon and lat data. We got this data through a library in the
-     * client, and passed to the server through http body
+     * API call uses lon and lat data. We got this data either through a library in the
+     * client, and passed to the server through http body, or through citiesLatsAndLons.json file.
+     *
+     * @param lat latitude coordinate of the city.
+     * @param lon longitude coordinate of the city.
+     * @return JSON object with the city's weather data.
      */
     public static JsonNode fetchWeatherData(Double lat, Double lon) {
         JsonNode weatherData = JsonNodeFactory.instance.objectNode();
 
         /*
-         * Here we construct the URL for the API call using lat and lon data we got from
-         * the client, and our private API key
+         * Here we construct the URL for the API call using lat and lon data and our private API key
          */
         final String WEATHERDATA_URL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon
                 + "&appid=" + OPEN_WEATHER_API_KEY;

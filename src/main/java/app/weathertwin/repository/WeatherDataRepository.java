@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import app.weathertwin.entity.WeatherData;
 
+/**
+ * This is the repository that stores WeatherData objects
+ */
 public interface WeatherDataRepository extends CrudRepository<WeatherData, Long> {
 
     /*
@@ -39,6 +42,19 @@ public interface WeatherDataRepository extends CrudRepository<WeatherData, Long>
      * the input location and found similar location are not the same
      */
 
+    /**
+     * This is a SQL query for finding cities in the repository that have a similar weather
+     *
+     * @param minTemp the minimum temperature value (inclusive) for filtering records
+     * @param maxTemp the maximum temperature value (inclusive) for filtering records
+     * @param minLon the lower bound of the longitude range to be excluded
+     * @param maxLon the upper bound of the longitude range to be excluded
+     * @param minLat the lower bound of the latitude range to be excluded
+     * @param maxLat the upper bound of the latitude range to be excluded
+     * @param weatherGroup input city's weather condition
+     * @param id input city's id
+     * @return list of WeatherData objects from the query
+     */
     @Query(value = "SELECT * FROM weatherdatatable WHERE (temp BETWEEN :minTemp AND :maxTemp) AND (lon NOT BETWEEN :minLon AND :maxLon) AND (lat NOT BETWEEN :minLat AND :maxLat) AND (weather_group = :weatherGroup) AND (id != :id)", nativeQuery = true)
     List<WeatherData> findWeatherDataThatMeetsConditions(
             @Param("minTemp") Double minTemp,

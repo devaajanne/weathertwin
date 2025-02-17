@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * WeatherData is the main entity in this application. It stores weather data for one city.
+ */
 @Entity
 @Table(name = "weatherdatatable")
 public class WeatherData {

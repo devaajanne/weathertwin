@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import app.weathertwin.entity.WeatherData;
 import app.weathertwin.repository.WeatherDataRepository;
 
+/**
+ * This is a service class to hold methods for querying and finding matching data
+ */
 @Service
 public class QueryService {
 
@@ -21,7 +24,12 @@ public class QueryService {
         this.weatherDataRepository = weatherDataRepository;
     }
 
-    /* Here we set our search criteria */
+    /**
+     *  This is a method for setting search criteria for querying the cities with matching weather from the database
+     *
+     * @param inputWeatherData a WeatherData object for the input city
+     * @return a list of criteria matching WeatherData objects
+     */
     public List<WeatherData> findSimilarWeatherDataFromrepository(WeatherData inputWeatherData) {
         /*
          * Input and similar location temperatures must be no more than 1 kelvin from
@@ -37,8 +45,7 @@ public class QueryService {
         Double maxLat = inputWeatherData.getLat() + 10.0;
 
         /*
-         * Input and similar locations must have a similar kind of weather (ie. sunny,
-         * rainy, cloudy etc.)
+         * Input and similar locations must have a similar kind of weather (i.e. sunny, rainy, cloudy etc.)
          */
         String weatherGroup = inputWeatherData.getWeatherGroup();
 
@@ -56,10 +63,13 @@ public class QueryService {
                 id);
     }
 
-    /*
+    /**
      * By default, we store WeatherData objects with the country code and without
      * the country name. Only when the objects are sent to the client do we set the
-     * country name based on the country code. This makes the app run more smootly.
+     * country name based on the country code. This makes the app run more smoothly.
+     *
+     * @param countryCode city's country code
+     * @return country name matching the country code
      */
     public String findCountryNameByCountryCode(String countryCode) {
         String countryName = countryCode;

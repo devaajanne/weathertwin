@@ -13,6 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import app.weathertwin.entity.WeatherData;
 import app.weathertwin.repository.WeatherDataRepository;
 
+/**
+ * This is a service class to holds a method for fetching weather data from API at 1-hour interval.
+ */
 @Service
 @Profile("!test")
 public class DataFetchService {
@@ -23,6 +26,10 @@ public class DataFetchService {
         this.weatherDataRepository = weatherDataRepository;
     }
 
+    /**
+     * This method fetches weather data from the OpenWeatherMap.org API for the locations specified in the citiesLatsAndLons.json file.
+     * The method makes one request every 1,5 seconds, and is scheduled to run every hour.
+     */
     @Scheduled(fixedRate = 3_600_000)
     public void fetchDataPeriodicallyFromAPI() {
         try {
@@ -36,7 +43,7 @@ public class DataFetchService {
 
                 /*
                  * OpenWeatherMap API has a limit of 60 requests per minute on the tier used in
-                 * this application. We slow down own own API fetches by including a sleep
+                 * this application. We slow down our own API fetches by including a sleep
                  * period of 1,5 seconds between the calls so that our API key does not get
                  * blocked
                  */

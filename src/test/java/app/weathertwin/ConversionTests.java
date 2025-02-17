@@ -8,15 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import app.weathertwin.service.ConversionService;
 import app.weathertwin.entity.WeatherData;
 
+/**
+ * Tests for validating the temperature conversion methods in ConversionService.
+ * By default, the OpenWeatherMap API returns temperatures in standard units (Kelvin). These tests verify
+ * that the conversion methods correctly convert temperatures to metric (Celsius) and imperial (Fahrenheit)
+ * units. The tests run under the "test" profile.
+ */
 @SpringBootTest(properties = "spring.profiles.active=test")
 public class ConversionTests {
 
-    /*
-     * By default, the OpenWeatherMap API returns us standard (kelvin) units. Here
-     * we test that the temperature unit conversions work properly, ie. standard ->
-     * metric (celsius) and standard -> imperial (fahrenheit)
+    /**
+     * Tests the conversion from standard (Kelvin) to metric (Celsius) temperature units.
      */
-
     @Test
     public void testStandardToMetricConversion() {
         Double standardTemp = 274.15;
@@ -25,6 +28,9 @@ public class ConversionTests {
         assertEquals(metricTemp, ConversionService.tempStandardToMetric(standardTemp));
     }
 
+    /**
+     * Tests the conversion from standard (Kelvin) to imperial (Fahrenheit) temperature units.
+     */
     @Test
     public void testStandardToImperialConversion() {
         Double standardTemp = 255.93;
@@ -33,6 +39,10 @@ public class ConversionTests {
         assertEquals(imperialTemp, ConversionService.tempStandardToImperial(standardTemp));
     }
 
+    /**
+     * Tests the conversion of the temperature field in a WeatherData object from standard (Kelvin)
+     * to metric (Celsius) units
+     */
     @Test
     public void testWeatherDataTempConversionToMetric() {
         WeatherData weatherData = new WeatherData(1L, 25.55, 25.66, "Helsinki", "FI", "Finland", 274.15, null, "Snow", "13d");
@@ -43,6 +53,10 @@ public class ConversionTests {
         assertEquals(metricTemp, newWeatherData.getTemp());
     }
 
+    /**
+     * Tests the conversion of the temperature field in a WeatherData object from standard (Kelvin)
+     * to imperial (Fahrenheit) units
+     */
     @Test
     public void testWeatherDataTempConversionToImperial() {
         WeatherData weatherData = new WeatherData(1L, 25.55, 25.66, "Helsinki", "FI", "Finland", 255.93, null, "Snow", "13d");

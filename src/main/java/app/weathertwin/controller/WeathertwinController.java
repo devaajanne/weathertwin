@@ -16,6 +16,9 @@ import app.weathertwin.service.HttpService;
 import app.weathertwin.service.ConversionService;
 import app.weathertwin.service.QueryService;
 
+/**
+ * This is the REST API controller for the application
+ */
 @RestController
 @RequestMapping("/api")
 public class WeathertwinController {
@@ -26,12 +29,10 @@ public class WeathertwinController {
         this.queryService = queryService;
     }
 
-    /*
-     * The application has only one API endpoint. This endpoint receives the user's
-     * inputs from the client, and returns
-     * 1) user's input location's weather data and
-     * 2) weather data for a similar location.
-     * User's unit input (metric/imperial) is taken into account
+    /**
+     * REST API endpoint that handles receiving user's input from the client, querying for cities with similar weather and returning the results
+     * @param requestBody JSON object for the input city sent from client
+     * @return HashMap with two entries: input location WeatherData, and similar location WeatherData
      */
     @PostMapping("/weatherdata")
     public HashMap<String, WeatherData> getCityWeatherData(@RequestBody JsonNode requestBody) {

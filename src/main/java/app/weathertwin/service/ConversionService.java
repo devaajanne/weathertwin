@@ -8,11 +8,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import app.weathertwin.entity.WeatherData;
 
+/**
+ * This is a service class that holds methods for converting temperature units
+ * to other units, and JSON objects to WeatherData objects.
+ */
 @Service
 public class ConversionService {
 
-    /*
-     * This is a simple method to convert kelvin temperature to celsius temperature
+    /**
+     * This is a simple method to convert kelvin temperature to Celsius temperature.
+     * 
+     * @param standardTemp temperature in kelvin
+     * @return temperature in Celsius
      */
     public static Double tempStandardToMetric(Double standardTemp) {
         DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
@@ -20,9 +27,12 @@ public class ConversionService {
         return metricTemp;
     }
 
-    /*
-     * This is a simple method to convert kelvin temperature to fahrenheit
-     * temperature
+    /**
+     * This is a simple method to convert kelvin temperature to Fahrenheit
+     * temperature.
+     * 
+     * @param standardTemp temperature in kelvin
+     * @return temperature in Fahrenheit
      */
     public static Double tempStandardToImperial(Double standardTemp) {
         DecimalFormat zeroDecimalPlace = new DecimalFormat("0");
@@ -30,11 +40,14 @@ public class ConversionService {
         return imperialTemp;
     }
 
-    /*
+    /**
      * This method converts fetched JSON weather data from the API into a
      * WeatherData object because the API returns more data than we actually need
      * for our application. So we convert it because we want to have only the data
-     * we need in our database
+     * we need in our database.
+     * 
+     * @param cityWeatherDataJSON JSON object holding all the weather data for a city
+     * @return a WeatherData object with only the fields we need from the JSON object, or an empty WeatherData object
      */
     public static WeatherData JsonNodeToWeatherData(JsonNode cityWeatherDataJSON) {
         WeatherData weatherData = new WeatherData();
@@ -45,10 +58,12 @@ public class ConversionService {
 
         /*
          * We find the data we need in the JSON weather data and set a WeatherData
-         * object with corresponding attributes. Country name is not provided by the
-         * API, and we set it to null for now. The country name will be se only if this
-         * particular WeatherData object is selected to be returned to the client. Also,
-         * temp unit will be set later if the location is returned to the client.
+         * object with corresponding attributes.
+         * Country name and temp unit are not provided by the API, and we set them to
+         * null
+         * for now.
+         * The country name and temp unit will be set later only if this particular
+         * WeatherData object is selected to be returned to the client.
          */
         weatherData.setId(cityWeatherDataJSON.get("id").asLong());
         weatherData.setLat(cityWeatherDataJSON.get("coord").get("lat").asDouble());
@@ -64,11 +79,15 @@ public class ConversionService {
         return weatherData;
     }
 
-    /*
+    /**
      * By default, we save WeatherData objects with standard (kelvin) temperatures
      * into the database. The temperature will be converted according to what unit
      * the user selected in the client when a WeatherData object is sent to the
      * client. We also set the unit's symbol (°C or °F) according to the unit.
+     * 
+     * @param weatherData the WeatherData object where we want to convert temperature units
+     * @param unit the temperature unit we want to convert the temperature to
+     * @return the WeatherData object in @param with the correct temperature unit and temperature symbol
      */
     public static WeatherData convertTemp(WeatherData weatherData, String unit) {
 

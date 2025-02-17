@@ -8,12 +8,17 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+/**
+ * This configuration class holds the application's CORS config.
+ */
 @Configuration
 public class CorsConfig {
 
-    /*
-     * Here we set the configuration for cross origin resource sharing so that our
-     * front-end client can send requests to our back-end server
+    /**
+     * Here we set the configuration for cross-origin resource sharing so that our
+     * front-end client can send requests to our back-end server.
+     *
+     * @return a CorsConfigurationSource object configured with the specified CORS settings.
      */
     @Bean
     public CorsConfigurationSource getCorsConfigurationSource() {
