@@ -5,6 +5,8 @@ Weather Twin a fun, silly little app to find which city in the world has the sam
 This is the repository for the server-side application. For the client-side repository, see here: [Weather Twin client](https://github.com/devaajanne/weathertwin-client).
 
 ## About the project
+Enter a location - your own city perhaps - and see where in the world is there a city that is experiencing the same weather at the moment!
+
 Weather Twin is a hobby project alongside my studies. I wanted to learn more about back and front end development and deepen my knowledge about the technologies used in the project. I also wanted to create an application that requires no log-in so that the app is simple, easy to use, and hopefully fun as well!
 
 ## Deployment
