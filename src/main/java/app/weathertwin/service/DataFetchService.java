@@ -27,6 +27,15 @@ public class DataFetchService {
     }
 
     /**
+     * This method clears the database every 48 hours because sometimes, OpenWeatherAPI fetches weather data for the same
+     * location with a different id, resulting in database having old and outdated weather data
+     */
+    @Scheduled(fixedRate = 172_800_000)
+    public void clearDatabase() {
+        weatherDataRepository.deleteAll();
+    }
+
+    /**
      * This method fetches weather data from the OpenWeatherMap.org API for the locations specified in the citiesLatsAndLons.json file.
      * The method makes one request every 1,5 seconds, and is scheduled to run every hour.
      */
