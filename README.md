@@ -33,7 +33,7 @@ This app has been written in JavaScript and [React](https://react.dev/). Install
 - [Axios](https://www.npmjs.com/package/axios)
 - [React Google Places Autocomplete](https://www.npmjs.com/package/react-google-places-autocomplete)
 
-Client-side app is deployed on [GitHub Pages](https://pages.github.com/)
+Client-side app is deployed on [GitHub Pages](https://devaajanne.github.io/weathertwin-client/)
 
 For the back-end side of the project, written in Java with Spring Boot, see this repository: [Weather Twin server](https://github.com/devaajanne/weathertwin-server).
 
