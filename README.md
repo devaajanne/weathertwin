@@ -35,7 +35,14 @@ Weather Twin's server app works by
 
 ## Technologies
 
-The server-side of this application has been written in [Java](https://www.java.com/en/) version 23, using [Spring Boot](https://spring.io/projects/spring-boot) version 3.4.2 and [Gradle](https://gradle.org/) version 8.11.1. Database has been created with [PostgreSQL](https://www.postgresql.org/) with database migration with [Liquibase](https://www.liquibase.com/). For reading JSON files, [Jackson](https://github.com/FasterXML/jackson) library is used.
+[![Java][java-logo]][java-url]
+[![Spring Boot][spring-logo]][spring-url]
+[![Gradle][gradle-logo]][gradle-url]
+[![PostgreSQL][postgres-logo]][postgres-url]
+[![Liquibase][liquibase-logo]][liquibase-url]
+[![Heroku][heroku-logo]][heroku-url]
+
+The server-side of this application has been written in [Java](https://www.java.com/en/) version 23, using [Spring Boot](https://spring.io/projects/spring-boot) version 3.5.5 and [Gradle](https://gradle.org/) version 8.11.1. Database has been created with [PostgreSQL](https://www.postgresql.org/) with database migration with [Liquibase](https://www.liquibase.com/). For reading JSON files, [Jackson](https://github.com/FasterXML/jackson) library is used.
 
 Server-side app and PostgreSQL database are deployed on [Heroku](https://www.heroku.com/).
 
@@ -164,3 +171,17 @@ These files are located in `src/main/resources`. These have been created with th
 - [ISO-3166-Countries-with-Regional-Codes by lukes](https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes)
 
 As their works have been licenced with Creative Commons 4.0 license, the JSON files in this repository have also been licensed under [Creative Commonce 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+[java-logo]: https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white&style=for-the-badge
+[java-url]: https://www.java.com/en/
+[spring-logo]: https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white
+[spring-url]: https://spring.io/
+[gradle-logo]: https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white
+[gradle-url]: https://gradle.org/
+[heroku-logo]: https://img.shields.io/badge/Heroku-430098?logo=heroku&logoColor=fffe&style=for-the-badge
+[heroku-url]: https://www.heroku.com/
+[postgres-logo]: https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
+[postgres-url]: https://www.postgresql.org/
+[liquibase-logo]: https://img.shields.io/badge/Liquibase-2962FF?style=for-the-badge&logo=Liquibase&logoColor=white
+[liquibase-url]: https://www.liquibase.com/
