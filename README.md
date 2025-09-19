@@ -1,40 +1,94 @@
+<a id="readme-top"></a>
+
 # Weather Twin
 
 Weather Twin a fun, silly little app to find which city in the world has the same weather as your location.
+<br>
+<details>
+<summary><b>Table of Contents</b></summary>
+  <ol>
+    <li>
+        <a href="#about-the-project">About the project</a>
+    </li>
+    <li>
+        <a href="#deployment">Deployment</a>
+    </li>
+    <li>
+        <a href="#how-it-works">How it works</a>
+    </li>     
+    <li>
+        <a href="#technologies">Technologies</a>
+    </li>
+    <li>
+        <a href="#api-documentation">API documentation</a>
+    </li>
+    <li>
+        <a href="#contact">Contact</a>
+    </li>
+    <li>
+        <a href="#license">License</a>
+    </li>
+  </ol>
+</details><br>
 
-This is the repository for the server-side application. For the client-side repository, see here: [Weather Twin client](https://github.com/devaajanne/weathertwin-client).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## About the project
 Enter a location - your own city perhaps - and see where in the world is there a city that is experiencing the same weather at the moment!
 
 Weather Twin is a hobby project alongside my studies. I wanted to learn more about back and front end development and deepen my knowledge about the technologies used in the project. I also wanted to create an application that requires no log-in so that the app is simple, easy to use, and hopefully fun as well!
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Deployment
 
 Weather Twin is now live at GitHub pages! See the live demo of the app here: [Weather Twin](https://devaajanne.github.io/weathertwin-client/)
 
-## How it works
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Weather Twin's server app works by
+## How It Works
 
-1. fetching weather data from OpenWeatherMap.org API for 1200 locations around the world every hour
-2. converting fetched data from JSON to WeatherData ojects with only the fields we need from the JSON
-3. saving fetched weather data to PostgreSQL
-4. getting the user's input location's name and coordinates as well as desired temperature unit from the client
-5. fething weather data for the user's input location and converting the received weather data from JSON to WeatherData object
-6. querying the database for similar locations that experience the same weather but are not right next to each other with the following criteria:
+### Client-side
+1) Gets the user's desired city through React Google Places Autocomplete input field.
+2) Gets the user's desired temperature unit (Celsius or Fahrenheit).
+3) Finds the coordinates (latitude and longitude) for the selected city.
+4) Submits the user's input data to the server.
+5) Receives weather data for the input location and a location with similar weather.
+5) Displays both weather data in the selected temperature unit.
+6) Clears inputs for the next submission.
 
-- user's input location must be excluded
-- locations' temperature must be at most 1 degree kelvin (1 °C or 1.8 °F) apart from each other
-- locations' latitude coordinates must be at least 20 degrees from each other
-- locations' longitude coordinates must be at least 20 degrees from each other
-- locations must experience the same weather conditions (clouds, rain, clear etc)
+### Server-side
+1) Fetches weather data from OpenWeatherMap.org API for 1200 locations around the world every hour.
+2) Converts fetched data from JSON to WeatherData objects with only the needed fields.
+3) Saves fetched weather data to PostgreSQL.
+4) Gets the user's input location's name, coordinates, and desired temperature unit from the client.
+5) Fetches weather data for the input location and converts it to a WeatherData object.
+6) Queries the database for similar locations with the following criteria:
+- Excludes the user's input location.
+- Temperature must be at most 1 degree kelvin (1 °C or 1.8 °F) apart.
+- Latitude and longitude must be at least 20 degrees apart.
+- Must experience the same weather conditions (clouds, rain, clear, etc).
+7) Returns a random similar location or null if none found.
+8) Returns both input and similar location weather data to the client.
 
-7. getting a random location from the list of similar locations, or null if no similar location found
-8. saving input and similar location WeatherData objects into a map and returning it to the client
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Technologies
 
+### Client-side
+
+[![JavaScript][javascript-logo]][javascript-url]
+[![React][react-logo]][react-url]
+
+
+This app has been written in JavaScript and [React](https://react.dev/). Installed libraries include
+
+- [Material UI](https://mui.com/material-ui/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [React Google Places Autocomplete](https://www.npmjs.com/package/react-google-places-autocomplete)
+
+
+### Server-side
 [![Java][java-logo]][java-url]
 [![Spring Boot][spring-logo]][spring-url]
 [![Gradle][gradle-logo]][gradle-url]
@@ -46,7 +100,7 @@ The server-side of this application has been written in [Java](https://www.java.
 
 Server-side app and PostgreSQL database are deployed on [Heroku](https://www.heroku.com/).
 
-For the front-end side of the project, written in JavaScript and React, see this repository: [Weather Twin client](https://github.com/devaajanne/weathertwin-client).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## API documentation
 
@@ -154,9 +208,16 @@ The request body should be a JSON object. It must include the following fields:
 
 </details>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Contact
 
+[![LinkedIn][linkedin-logo]][linkedin-url]
+[![Gmail][gmail-logo]][gmail-url]
+
 You can contact me through [LinkedIn](https://www.linkedin.com/in/janair/) or by email at janne.airaksinen.mail(at)gmail.com.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
 
@@ -165,13 +226,20 @@ There are two JSON files of used in this application:
 - ISO3166_CountryCodesAndNames.json
 - citiesLatsAndLons.json
 
-These files are located in `src/main/resources`. These have been created with the help of AI. The base for the files have been JSON files found in these two GitHub repositories:
+These files are located in `weathertwin-server/src/main/resources`. These have been created with the help of AI. The base for the files have been JSON files found in these two GitHub repositories:
 
 - [cities-json by lmfmaier](https://github.com/lmfmaier/cities-json)
 - [ISO-3166-Countries-with-Regional-Codes by lukes](https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes)
 
 As their works have been licenced with Creative Commons 4.0 license, the JSON files in this repository have also been licensed under [Creative Commonce 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+[linkedin-logo]: https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white
+[linkedin-url]: https://www.linkedin.com/in/janair/
+[gmail-logo]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
+[gmail-url]: mailto:janne.airaksinen.mail@gmail.com
 
 [java-logo]: https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white&style=for-the-badge
 [java-url]: https://www.java.com/en/
@@ -185,3 +253,10 @@ As their works have been licenced with Creative Commons 4.0 license, the JSON fi
 [postgres-url]: https://www.postgresql.org/
 [liquibase-logo]: https://img.shields.io/badge/Liquibase-2962FF?style=for-the-badge&logo=Liquibase&logoColor=white
 [liquibase-url]: https://www.liquibase.com/
+
+[javascript-logo]: https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge
+[javascript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[react-logo]: https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB&style=for-the-badge
+[react-url]: https://react.dev/
+
+
