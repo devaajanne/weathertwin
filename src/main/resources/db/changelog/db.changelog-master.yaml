@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JanneAiraksinen / @devaajanne
+      changes:
+        - createTable:
+            tableName: example_table
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: lat
+                  type: FLOAT
+              - column:
+                  name: lon
+                  type: FLOAT
+              - column:
+                  name: city
+                  type: VARCHAR
+              - column:
+                  name: country_code
+                  type: VARCHAR
+              - column:
+                  name: country_name
+                  type: VARCHAR
+              - column:
+                  name: temp
+                  type: FLOAT
+              - column:
+                  name: temp_unit
+                  type: VARCHAR
+              - column:
+                  name: weather_group
+                  type: VARCHAR
+              - column:
+                  name: weather_icon
+                  type: VARCHAR
