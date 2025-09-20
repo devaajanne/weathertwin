@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://weathertwin-server-6008c41e2aa4.herokuapp.com/api";
+const URL = "https://weathertwin-f1db2b3da629.herokuapp.com/api";
 
 const fetchWeatherData = async (bodyData) => {
   const config = {
