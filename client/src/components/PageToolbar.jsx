@@ -137,33 +137,18 @@ export default function PageToolbar() {
               <DialogContent>
                 <Typography gutterBottom={true}>
                   Weather Twin is a full-stack application with back-end and
-                  front-end. Both have their own repositories on GitHub where
-                  you can find the commented source code as well as READMEs.
+                  front-end. You can find the commented source code as well as
+                  the README on GitHub.
                 </Typography>
                 <Typography gutterBottom={true}>
                   <Button
                     variant="contained"
-                    aria-label="link to github repository for front-end"
+                    aria-label="link to github repository"
                     onClick={(event) =>
-                      window.open(
-                        "https://github.com/devaajanne/weathertwin-server",
-                      )
+                      window.open("https://github.com/devaajanne/weathertwin")
                     }
                   >
-                    Click here to see the app's back-end repository on GitHub
-                  </Button>
-                </Typography>
-                <Typography gutterBottom={true}>
-                  <Button
-                    variant="contained"
-                    aria-label="link to github repository for front-end"
-                    onClick={(event) =>
-                      window.open(
-                        "https://github.com/devaajanne/weathertwin-client",
-                      )
-                    }
-                  >
-                    Click here to see the app's front-end repository on GitHub
+                    Click here to see the app's repository on GitHub
                   </Button>
                 </Typography>
               </DialogContent>
