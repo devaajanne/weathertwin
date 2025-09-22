@@ -42,7 +42,7 @@ Weather Twin is a hobby project alongside my studies. I wanted to learn more abo
 
 ## Deployment
 
-Weather Twin is now live at GitHub pages! See the live demo of the app here: [Weather Twin](https://devaajanne.github.io/weathertwin-client/)
+Weather Twin is now live at GitHub pages! See the live demo of the app here: [Weather Twin](https://devaajanne.github.io/weathertwin/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
