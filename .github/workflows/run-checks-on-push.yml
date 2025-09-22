@@ -1,0 +1,56 @@
+name: Run Checks on Push
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+jobs:
+  run-server-formatting-check:
+    name: Run Server formatting check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Grant Gradle execute permissions
+        run: |
+          cd server
+          chmod +x ./gradlew
+
+      - name: Run Spotless check
+        run: |
+          cd server
+          ./gradlew spotlessCheck
+
+  run-client-formatting-check:
+    name: Run Client formatting check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Run Prettier check
+        run: |
+          cd client
+          npx prettier --check .
