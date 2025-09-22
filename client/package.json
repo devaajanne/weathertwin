@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://devaajanne.github.io/weathertwin-client/",
+  "homepage": "https://devaajanne.github.io/weathertwin/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
