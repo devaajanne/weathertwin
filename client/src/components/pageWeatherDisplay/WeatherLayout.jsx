@@ -15,8 +15,12 @@ export default function WeatherLayout() {
       <Container maxWidth="lg">
         <Grid container alignItems="flex-start" spacing={2}>
           <Grid item size={{ xs: 12 }}>
-              <Typography color="error" sx={{ textAlign: "center", variant: "h4", mt: 2 }}>
-              Weather Twin is currently down for maintenance. Please check back later!
+            <Typography
+              color="error"
+              sx={{ textAlign: "center", variant: "h4", mt: 2 }}
+            >
+              Weather Twin is currently down for maintenance. Please check back
+              later!
             </Typography>
             <Typography sx={{ textAlign: "center", variant: "h4", mt: 2 }}>
               Enter your city below and see which other city has the same
