@@ -24,6 +24,25 @@ export default function WeatherDisplay({ inputLocation, similarLocation }) {
 }
 
 WeatherDisplay.propTypes = {
-  inputLocation: PropTypes.string,
-  similarLocation: PropTypes.string,
+  inputLocation: PropTypes.shape({
+    countryCode: PropTypes.string,
+    countryName: PropTypes.string,
+    weatherIcon: PropTypes.string,
+    weatherGroup: PropTypes.string,
+    id: PropTypes.number,
+    city: PropTypes.string,
+    temp: PropTypes.number,
+    tempUnit: PropTypes.string,
+  }),
+  similarLocation:
+    PropTypes.shape({
+      countryCode: PropTypes.string,
+      countryName: PropTypes.string,
+      weatherIcon: PropTypes.string,
+      weatherGroup: PropTypes.string,
+      id: PropTypes.number,
+      city: PropTypes.string,
+      temp: PropTypes.number,
+      tempUnit: PropTypes.string,
+    }) || null,
 };
