@@ -17,8 +17,6 @@ import {
   DialogActions,
 } from "@mui/material";
 
-import SendIcon from "@mui/icons-material/Send";
-
 // NPM: https://www.npmjs.com/package/react-google-places-autocomplete
 // Docs: https://tintef.github.io/react-google-places-autocomplete/
 import GooglePlacesAutocomplete, {
