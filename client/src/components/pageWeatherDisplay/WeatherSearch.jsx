@@ -15,7 +15,6 @@ import {
   DialogContent,
   Typography,
   DialogActions,
-  CircularProgress,
 } from "@mui/material";
 
 import SendIcon from "@mui/icons-material/Send";
@@ -177,15 +176,8 @@ export default function WeatherSearch({
             </RadioGroup>
           </Box>
 
-          <Button
-            variant="contained"
-            onClick={handleSubmit}
-            endIcon={<SendIcon />}
-            loading={weatherDataIsLoading}
-            loadingIndicator={<CircularProgress size={25} thickness={5} />}
-            loadingPosition="center"
-          >
-            Submit
+          <Button variant="contained" onClick={handleSubmit}>
+            {weatherDataIsLoading ? "Loading..." : "Submit"}
           </Button>
 
           {/*This an alert to notify the user that they have not selected a city and/or a unit*/}
