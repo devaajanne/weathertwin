@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://weathertwin-server-6008c41e2aa4.herokuapp.com/api";
+const URL = import.meta.env.VITE_SERVER_URL;
 
 const fetchWeatherData = async (bodyData) => {
   const config = {
