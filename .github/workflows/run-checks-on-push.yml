@@ -54,3 +54,26 @@ jobs:
         run: |
           cd client
           npx prettier --check .
+
+  run-client-linting-check:
+    name: Run Client linting check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run ESLint
+        run: |
+          cd frontend
+          npx eslint .
