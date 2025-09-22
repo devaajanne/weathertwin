@@ -20,7 +20,7 @@ public class CorsConfig {
   @Bean
   public CorsConfigurationSource getCorsConfigurationSource() {
     CorsConfiguration corsConfig = new CorsConfiguration();
-    corsConfig.setAllowedOrigins(List.of("https://devaajanne.github.io"));
+    corsConfig.setAllowedOrigins(List.of("https://devaajanne.github.io/weathertwin/"));
     corsConfig.setAllowedMethods(List.of("POST", "OPTIONS")); // OPTIONS is needed due to pre-flight
     corsConfig.setAllowedHeaders(List.of("Content-Type"));
 
