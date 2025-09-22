@@ -1,5 +1,4 @@
-import React from "react";
-
+import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid2";
 import { Box } from "@mui/material";
 
@@ -23,3 +22,8 @@ export default function WeatherDisplay({ inputLocation, similarLocation }) {
     </>
   );
 }
+
+WeatherDisplay.propTypes = {
+  inputLocation: PropTypes.string,
+  similarLocation: PropTypes.string,
+};

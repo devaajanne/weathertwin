@@ -144,11 +144,11 @@ export default function PageToolbar() {
                   <Button
                     variant="contained"
                     aria-label="link to github repository"
-                    onClick={(event) =>
+                    onClick={() =>
                       window.open("https://github.com/devaajanne/weathertwin")
                     }
                   >
-                    Click here to see the app's repository on GitHub
+                    Click here to see the repository on GitHub
                   </Button>
                 </Typography>
               </DialogContent>

@@ -1,5 +1,3 @@
-import React from "react";
-
 import PageToolbar from "./PageToolBar";
 import WeatherLayout from "./pageWeatherDisplay/WeatherLayout";
 

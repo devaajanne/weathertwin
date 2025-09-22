@@ -1,5 +1,4 @@
-import React from "react";
-
+import PropTypes from "prop-types";
 import {
   Card,
   CardHeader,
@@ -9,7 +8,6 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
 
 export default function WeatherLocation({ location }) {
   // We return an empty card (ie. displays nothing) if no location has been searched yet or found
@@ -70,7 +68,7 @@ export default function WeatherLocation({ location }) {
               variant="contained"
               size="small"
               aria-label="link to location's full weather"
-              onClick={(event) => window.open(weatherURL)}
+              onClick={() => window.open(weatherURL)}
             >
               See full weather
             </Button>
@@ -80,3 +78,16 @@ export default function WeatherLocation({ location }) {
     </>
   );
 }
+
+WeatherLocation.propTypes = {
+  location: PropTypes.shape({
+    countryCode: PropTypes.string,
+    countryName: PropTypes.string,
+    weatherIcon: PropTypes.string,
+    weatherGroup: PropTypes.string,
+    id: PropTypes.number,
+    city: PropTypes.string,
+    temp: PropTypes.number,
+    tempUnit: PropTypes.string,
+  }),
+};

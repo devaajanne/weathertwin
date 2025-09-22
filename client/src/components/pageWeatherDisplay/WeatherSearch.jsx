@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 import {
   Button,
@@ -232,3 +233,8 @@ export default function WeatherSearch({
     </>
   );
 }
+
+WeatherSearch.propTypes = {
+  setInputLocation: PropTypes.func,
+  setSimilarLocation: PropTypes.func,
+};
