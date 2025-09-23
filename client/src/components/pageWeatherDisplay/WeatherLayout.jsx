@@ -8,6 +8,7 @@ import WeatherDisplay from "./WeatherDisplay";
 export default function WeatherLayout() {
   const [inputLocation, setInputLocation] = useState(null);
   const [similarLocation, setSimilarLocation] = useState(null);
+  const [weatherDataIsLoading, setWeatherDataIsLoading] = useState(false);
 
   return (
     <>
@@ -23,12 +24,15 @@ export default function WeatherLayout() {
             <WeatherSearch
               setInputLocation={setInputLocation}
               setSimilarLocation={setSimilarLocation}
+              weatherDataIsLoading={weatherDataIsLoading}
+              setWeatherDataIsLoading={setWeatherDataIsLoading}
             />
           </Grid>
           <Grid item size={{ xs: 12, md: 6 }} sx={{ mt: 2 }}>
             <WeatherDisplay
               inputLocation={inputLocation}
               similarLocation={similarLocation}
+              weatherDataIsLoading={weatherDataIsLoading}
             />
           </Grid>
         </Grid>

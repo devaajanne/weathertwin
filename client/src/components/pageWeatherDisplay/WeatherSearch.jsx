@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import {
@@ -25,20 +25,17 @@ import GooglePlacesAutocomplete, {
 } from "react-google-places-autocomplete";
 
 import { fetchWeatherData } from "../../api/ApiCalls";
-import { sleep } from "../../utils/Utils";
+import { getDefaultCity, sleep } from "../../utils/Utils";
 
 export default function WeatherSearch({
   setInputLocation,
   setSimilarLocation,
+  weatherDataIsLoading,
+  setWeatherDataIsLoading,
 }) {
   const [cityData, setCityData] = useState(null);
   const [unitInput, setUnitInput] = useState(null);
-  const [weatherDataIsLoading, setWeatherDataIsLoading] = useState(false);
   const [inputErrorAlertIsOpen, setInputErrorAlertIsOpen] = useState(false);
-  const [
-    noSimilarLocationErrorAlertIsOpen,
-    setNoSimilarLocationErrorAlertIsOpen,
-  ] = useState(false);
 
   const handleCityChange = (cityData) => {
     setCityData(cityData);
@@ -65,6 +62,23 @@ export default function WeatherSearch({
     }
   };
 
+  useEffect(() => {
+    const fetchDefaultWeather = async () => {
+      try {
+        setWeatherDataIsLoading(true);
+        await sleep(1500);
+        const response = await fetchWeatherData(getDefaultCity());
+        setWeatherDataIsLoading(false);
+        setInputLocation(response.data.inputLocation);
+        setSimilarLocation(response.data.similarLocation);
+      } catch (error) {
+        console.error("Error fetching default weather data: " + error);
+      }
+    };
+
+    fetchDefaultWeather();
+  }, [setInputLocation, setSimilarLocation, setWeatherDataIsLoading]);
+
   const handleSubmit = async () => {
     if (checkUserInput()) {
       // Here we set location states to null to clear the display, and indicate loading start
@@ -84,16 +98,7 @@ export default function WeatherSearch({
 
       await sleep(1500);
       setInputLocation(response.data.inputLocation);
-      await sleep(1500);
       setSimilarLocation(response.data.similarLocation);
-
-      // We check if a similar location has been found, and if not, an error dialog is opened
-      if (
-        response.data.inputLocation != null &&
-        response.data.similarLocation == null
-      ) {
-        setNoSimilarLocationErrorAlertIsOpen(true);
-      }
 
       // After we have loaded the data, we indicate that the loading has ended
       setWeatherDataIsLoading(false);
@@ -115,12 +120,11 @@ export default function WeatherSearch({
 
   const handleClose = () => {
     setInputErrorAlertIsOpen(false);
-    setNoSimilarLocationErrorAlertIsOpen(false);
   };
 
   return (
     <>
-      <Stack justifyContent="space-between" alignItems="center">
+      <Stack justifyContent="space-between" alignItems="center" marginTop={4}>
         <FormControl>
           <Box display="flex" justifyContent="center" alignItems="center">
             <GooglePlacesAutocomplete
@@ -147,7 +151,7 @@ export default function WeatherSearch({
             display="flex"
             flexDirection="column"
             alignItems="center"
-            sx={{ mt: 2, mb: 2 }}
+            sx={{ mt: 10, mb: 10 }}
           >
             <FormLabel
               sx={{
@@ -174,7 +178,11 @@ export default function WeatherSearch({
             </RadioGroup>
           </Box>
 
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            disabled={weatherDataIsLoading}
+          >
             {weatherDataIsLoading ? "Loading..." : "Submit"}
           </Button>
 
@@ -196,28 +204,6 @@ export default function WeatherSearch({
               </Button>
             </DialogActions>
           </Dialog>
-
-          {/*This an alert to notify the user that a similar location has not been found*/}
-          <Dialog
-            open={noSimilarLocationErrorAlertIsOpen}
-            onClose={handleClose}
-          >
-            <DialogTitle>Sorry!</DialogTitle>
-            <DialogContent>
-              <Typography gutterBottom={true}>
-                Unfortunately, we could not find any location that has a similar
-                weather as your location.
-              </Typography>
-              <Typography>
-                Please select another location or try again later.
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button variant="contained" onClick={handleClose}>
-                Got it!
-              </Button>
-            </DialogActions>
-          </Dialog>
         </FormControl>
       </Stack>
     </>
@@ -227,4 +213,6 @@ export default function WeatherSearch({
 WeatherSearch.propTypes = {
   setInputLocation: PropTypes.func,
   setSimilarLocation: PropTypes.func,
+  weatherDataIsLoading: PropTypes.bool,
+  setWeatherDataIsLoading: PropTypes.func,
 };
