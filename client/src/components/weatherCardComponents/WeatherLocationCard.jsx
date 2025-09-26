@@ -7,6 +7,8 @@ import {
   Typography,
   CardActions,
   Button,
+  Stack,
+  Box,
 } from "@mui/material";
 
 export default function WeatherLocationCard({ location }) {
@@ -27,7 +29,7 @@ export default function WeatherLocationCard({ location }) {
       <Card
         sx={{
           width: 275,
-          height: 425,
+          height: 275,
           display: "flex",
           flexDirection: "column",
         }}
@@ -55,19 +57,32 @@ export default function WeatherLocationCard({ location }) {
             height: "100%",
           }}
         >
-          <Typography variant={"h5"}>
-            {location.temp} {location.tempUnit}
-          </Typography>
-          <Typography variant={"h5"}>{location.weatherGroup}</Typography>
-          {/*Finds the weather icon for the location's weather, displays it on the card and fixes its position*/}
-          <i
-            className={weatherIconClass}
-            style={{
-              fontSize: "75px",
-              margin: "20px 0 0 0",
-            }}
-            aria-label={weatherIconAlt}
-          ></i>
+          <Stack direction="row">
+            {/*Finds the weather icon for the location's weather, displays it on the card and fixes its position*/}
+            <i
+              className={weatherIconClass}
+              style={{
+                fontSize: "75px",
+                margin: "0 20px 0 0",
+              }}
+              aria-label={weatherIconAlt}
+            ></i>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "center",
+                justifyContent: "center",
+                alignContent: "center",
+                marginLeft: 2,
+              }}
+            >
+              <Typography variant={"h5"}>
+                {location.temp} {location.tempUnit}
+              </Typography>
+              <Typography variant={"h5"}>{location.weatherGroup}</Typography>
+            </Box>
+          </Stack>
         </CardContent>
 
         <CardActions sx={{ justifyContent: "center" }}>

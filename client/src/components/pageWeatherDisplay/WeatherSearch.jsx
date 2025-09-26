@@ -124,7 +124,7 @@ export default function WeatherSearch({
 
   return (
     <>
-      <Stack justifyContent="space-between" alignItems="center" marginTop={4}>
+      <Stack justifyContent="space-between" alignItems="center" marginTop={2}>
         <FormControl>
           <Box display="flex" justifyContent="center" alignItems="center">
             <GooglePlacesAutocomplete
@@ -151,7 +151,7 @@ export default function WeatherSearch({
             display="flex"
             flexDirection="column"
             alignItems="center"
-            sx={{ mt: 10, mb: 10 }}
+            sx={{ mt: 2, mb: 2 }}
           >
             <FormLabel
               sx={{

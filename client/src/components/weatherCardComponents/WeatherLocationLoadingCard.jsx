@@ -14,7 +14,7 @@ export default function WeatherLocationLoadingCard() {
       <Card
         sx={{
           width: 275,
-          height: 425,
+          height: 275,
           display: "flex",
           flexDirection: "column",
         }}
