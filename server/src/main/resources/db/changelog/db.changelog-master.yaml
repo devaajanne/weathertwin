@@ -36,5 +36,5 @@ databaseChangeLog:
                   name: weather_group
                   type: VARCHAR
               - column:
-                  name: weather_icon
+                  name: weather_id
                   type: VARCHAR

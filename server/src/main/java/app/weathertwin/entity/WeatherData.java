@@ -39,7 +39,7 @@ public class WeatherData {
   @Column(name = "weather_group")
   String weatherGroup;
 
-  @Column(name = "weather_icon")
+  @Column(name = "weather_id")
   String weatherId;
 
   /* No-arg and arg constructors */
