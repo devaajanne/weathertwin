@@ -12,7 +12,7 @@ import {
 export default function WeatherLocationCard({ location }) {
   // Here we set the country's flag image's <img> tag's attributes
   // https://www.npmjs.com/package/country-flag-icons
-  const flagIconSrc = `http://purecatamphetamine.github.io/country-flag-icons/3x2/${location.countryCode}.svg`;
+  const flagIconSrc = `${import.meta.env.BASE_URL}flagIcons/${location.countryCode}.svg`;
   const flagIconAlt = `${location.countryName} flag`;
 
   // Here we set the weather's icon's <img> tag's attributes
