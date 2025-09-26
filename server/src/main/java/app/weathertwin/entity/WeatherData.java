@@ -40,7 +40,7 @@ public class WeatherData {
   String weatherGroup;
 
   @Column(name = "weather_icon")
-  String weatherIcon;
+  String weatherId;
 
   /* No-arg and arg constructors */
   public WeatherData() {}
@@ -55,7 +55,7 @@ public class WeatherData {
       Double temp,
       String tempUnit,
       String weatherGroup,
-      String weatherIcon) {
+      String weatherId) {
     this.id = id;
     this.lat = lat;
     this.lon = lon;
@@ -65,7 +65,7 @@ public class WeatherData {
     this.temp = temp;
     this.tempUnit = tempUnit;
     this.weatherGroup = weatherGroup;
-    this.weatherIcon = weatherIcon;
+    this.weatherId = weatherId;
   }
 
   /* Getters and setters */
@@ -174,16 +174,16 @@ public class WeatherData {
     return this;
   }
 
-  public String getWeatherIcon() {
-    return this.weatherIcon;
+  public String getWeatherId() {
+    return this.weatherId;
   }
 
-  public void setWeatherIcon(String weatherIcon) {
-    this.weatherIcon = weatherIcon;
+  public void setWeatherId(String weatherId) {
+    this.weatherId = weatherId;
   }
 
-  public WeatherData weatherIcon(String weatherIcon) {
-    setWeatherIcon(weatherIcon);
+  public WeatherData weatherId(String weatherId) {
+    setWeatherId(weatherId);
     return this;
   }
 
@@ -228,8 +228,8 @@ public class WeatherData {
         + ", tempUnit='"
         + getTempUnit()
         + "'"
-        + ", weatherIcon='"
-        + getWeatherIcon()
+        + ", weatherId='"
+        + getWeatherId()
         + "'"
         + ", weatherGroup='"
         + getWeatherGroup()

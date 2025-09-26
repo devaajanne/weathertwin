@@ -10,5 +10,5 @@ country_name VARCHAR,
 temp FLOAT,
 temp_unit VARCHAR,
 weather_group VARCHAR,
-weather_icon VARCHAR
+weather_id VARCHAR
 );

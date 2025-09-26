@@ -10,13 +10,14 @@ import {
 } from "@mui/material";
 
 export default function WeatherLocationCard({ location }) {
-  // Here we set the country's flag image's <img> tag's attributes
+  // Here we set the country's flag icon to card avatar
   // https://www.npmjs.com/package/country-flag-icons
   const flagIconSrc = `${import.meta.env.BASE_URL}flagIcons/${location.countryCode}.svg`;
   const flagIconAlt = `${location.countryName} flag`;
 
-  // Here we set the weather's icon's <img> tag's attributes
-  const weatherIconSrc = `https://openweathermap.org/img/wn/${location.weatherIcon}@2x.png`;
+  // Here we set the weather's icon to card content
+  // Weather icons are found using: https://github.com/erikflowers/weather-icons
+  const weatherIconClass = `wi wi-owm-${location.weatherId}`;
   const weatherIconAlt = `${location.weatherGroup} icon`;
 
   const weatherURL = `https://openweathermap.org/city/${location.id}`;
@@ -59,11 +60,14 @@ export default function WeatherLocationCard({ location }) {
           </Typography>
           <Typography variant={"h5"}>{location.weatherGroup}</Typography>
           {/*Finds the weather icon for the location's weather, displays it on the card and fixes its position*/}
-          <img
-            src={weatherIconSrc}
-            alt={weatherIconAlt}
-            style={{ width: 150, height: 150 }}
-          />
+          <i
+            className={weatherIconClass}
+            style={{
+              fontSize: "75px",
+              margin: "20px 0 0 0",
+            }}
+            aria-label={weatherIconAlt}
+          ></i>
         </CardContent>
 
         <CardActions sx={{ justifyContent: "center" }}>
@@ -87,7 +91,7 @@ WeatherLocationCard.propTypes = {
     PropTypes.shape({
       countryCode: PropTypes.string,
       countryName: PropTypes.string,
-      weatherIcon: PropTypes.string,
+      weatherId: PropTypes.string,
       weatherGroup: PropTypes.string,
       id: PropTypes.number,
       city: PropTypes.string,

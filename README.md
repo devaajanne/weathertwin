@@ -87,6 +87,8 @@ This app has been written in JavaScript and [React](https://react.dev/). Install
 - [Axios](https://www.npmjs.com/package/axios)
 - [React Google Places Autocomplete](https://www.npmjs.com/package/react-google-places-autocomplete)
 
+Weather icons use this icon pack: [Weather Icons](https://erikflowers.github.io/weather-icons/)
+
 
 ### Server-side
 [![Java][java-logo]][java-url]
@@ -165,7 +167,7 @@ The request body should be a JSON object. It must include the following fields:
     "temp": -5.6,
     "tempUnit": "°C",
     "weatherGroup": "Clouds",
-    "weatherIcon": "03d"
+    "weatherId": "802"
   },
   "inputLocation": {
     "city": "Helsinki",
@@ -177,7 +179,7 @@ The request body should be a JSON object. It must include the following fields:
     "temp": -5.4,
     "tempUnit": "°C",
     "weatherGroup": "Clouds",
-    "weatherIcon": "03d"
+    "weatherId": "802"
   }
 }
 ```
@@ -201,7 +203,7 @@ The request body should be a JSON object. It must include the following fields:
     "temp": -5.4,
     "tempUnit": "°C",
     "weatherGroup": "Clouds",
-    "weatherIcon": "03d"
+    "weatherId": "802"
   }
 }
 ```

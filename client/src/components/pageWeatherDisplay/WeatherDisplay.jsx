@@ -45,7 +45,7 @@ WeatherDisplay.propTypes = {
   inputLocation: PropTypes.shape({
     countryCode: PropTypes.string,
     countryName: PropTypes.string,
-    weatherIcon: PropTypes.string,
+    weatherId: PropTypes.string,
     weatherGroup: PropTypes.string,
     id: PropTypes.number,
     city: PropTypes.string,
@@ -55,7 +55,7 @@ WeatherDisplay.propTypes = {
   similarLocation: PropTypes.shape({
     countryCode: PropTypes.string,
     countryName: PropTypes.string,
-    weatherIcon: PropTypes.string,
+    weatherId: PropTypes.string,
     weatherGroup: PropTypes.string,
     id: PropTypes.number,
     city: PropTypes.string,
