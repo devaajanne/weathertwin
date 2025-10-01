@@ -9,7 +9,7 @@ startServer() {
 }
 
 # Start the client service
-startClient(){
+startClient() {
     cd client && npm run dev && cd ..
 }
 
