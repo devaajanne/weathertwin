@@ -31,10 +31,12 @@ export default function PageToolbar() {
   };
 
   const handleOpenInfoDialog = () => {
+    setAnchorEl(null);
     setInfoDialogIsOpen(true);
   };
 
   const handleOpenGitHubDialog = () => {
+    setAnchorEl(null);
     setGitHubDialogIsOpen(true);
   };
 
