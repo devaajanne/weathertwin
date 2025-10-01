@@ -119,33 +119,31 @@ As a result, the endpoint retuns the weather for the input location as well as t
 
 **URL** : `/api/weatherdata`
 
-**Method** : `POST`
+**Method** : `GET`
 
 **Auth required** : No
 
 **Path parameters** : None
 
-**Request body content** :
+**Query parameters**:
 
-The request body should be a JSON object. It must include the following fields:
+The query parameters must contain these parameters:
 
-| Field        | Type   | Required | Description                                                                                        |
+| Parameter        | Type   | Required | Description                                                                                        |
 | ------------ | ------ | -------- | -------------------------------------------------------------------------------------------------- |
-| `cityName`   | String | YES      | The name of the input city. Can include the city's country, separated by comma.                    |
-| `cityCoords` | JSON   | YES      | The coordinates of the city. Must include `lat` and `lon` fields and their values as float/double. |
-| `unit`       | String | YES      | Response unit. Must be `standard`/`null`/empty, `metric`, or `imperial`.                           |
+| `city`   | string | YES      | The name of the input city. Can include the city's country, separated by comma.                    |
+| `lat` | float/double   | YES      | The latitude coordinate of the city. |
+| `lon` | float/double   | YES      | The longitude coordinates of the city.  |
+| `unit`       | string | YES      | Response unit. Must be `standard`/`null`/empty, `metric`, or `imperial`.                           |
+
+**Request body content** : None
 
 #### Example request
 
-`POST /api/weatherdata`
+`GET /api/weatherdata`
 
-```json
-{
-  "cityName": "Helsinki, Finland",
-  "cityCoords": { "lat": 60.16985569999999, "lon": 24.938379 },
-  "unit": "metric"
-}
-```
+`{serverURL}/api/weatherdata?city=Helsinki, Finland&lat=60.16985569999999&lon=24.938379&unit=metric`
+
 
 ### Success reponses
 
