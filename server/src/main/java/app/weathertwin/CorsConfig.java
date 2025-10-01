@@ -32,7 +32,7 @@ public class CorsConfig {
   public CorsConfigurationSource getCorsConfigurationSource() {
     CorsConfiguration corsConfig = new CorsConfiguration();
     corsConfig.setAllowedOrigins(List.of(CORS_ALLOWED_ORIGIN));
-    corsConfig.setAllowedMethods(List.of("POST", "OPTIONS")); // OPTIONS is needed due to pre-flight
+    corsConfig.setAllowedMethods(List.of("GET", "OPTIONS")); // OPTIONS is needed due to pre-flight
     corsConfig.setAllowedHeaders(List.of("Content-Type"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -66,7 +66,7 @@ export default function WeatherSearch({
     const fetchDefaultWeather = async () => {
       try {
         setWeatherDataIsLoading(true);
-        await sleep(1500);
+        await sleep(1000);
         const response = await fetchWeatherData(getDefaultCity());
         setWeatherDataIsLoading(false);
         setInputLocation(response.data.inputLocation);
@@ -88,13 +88,14 @@ export default function WeatherSearch({
 
       // Here we load the actual data and set it to correct states
       // Sleep time is included for user friendliness
-      const cityLatLon = await getLatAndLon();
-      const bodyData = JSON.stringify({
-        cityName: cityData.label,
-        cityCoords: cityLatLon,
+      const { lat, lon } = await getLatAndLon();
+      const queryData = {
+        city: cityData.label,
+        lat: lat,
+        lon: lon,
         unit: unitInput,
-      });
-      const response = await fetchWeatherData(bodyData);
+      };
+      const response = await fetchWeatherData(queryData);
 
       await sleep(1500);
       setInputLocation(response.data.inputLocation);

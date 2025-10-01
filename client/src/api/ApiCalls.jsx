@@ -2,13 +2,11 @@ import axios from "axios";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
-const fetchWeatherData = async (bodyData) => {
-  const config = {
-    headers: { "Content-Type": "application/json" },
-  };
-
+const fetchWeatherData = async (queryData) => {
   try {
-    const response = await axios.post(URL + "/weatherdata", bodyData, config);
+    const response = await axios.get(`${URL}/weatherdata`, {
+      params: queryData,
+    });
     return response;
   } catch (error) {
     console.error("fetchWeatherData error: " + error);

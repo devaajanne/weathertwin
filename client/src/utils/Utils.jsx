@@ -21,16 +21,18 @@ const getDefaultCity = () => {
   const defaultCity = Array.from(cityMap.keys())[
     Math.floor(Math.random() * cityMap.size)
   ];
-  const defaultLatLon = cityMap.get(defaultCity);
+  const defaultLat = cityMap.get(defaultCity).lat;
+  const defaultLon = cityMap.get(defaultCity).lon;
   const defaultUnit = units[Math.floor(Math.random() * units.length)];
 
-  const bodyData = JSON.stringify({
-    cityName: defaultCity,
-    cityCoords: defaultLatLon,
+  const queryData = {
+    city: defaultCity,
+    lat: defaultLat,
+    lon: defaultLon,
     unit: defaultUnit,
-  });
+  };
 
-  return bodyData;
+  return queryData;
 };
 
 // This is a a method to make the app wait a certain time
