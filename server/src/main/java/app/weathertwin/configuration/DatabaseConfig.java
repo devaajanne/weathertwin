@@ -1,4 +1,4 @@
-package app.weathertwin;
+package app.weathertwin.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

@@ -1,4 +1,4 @@
-package app.weathertwin;
+package app.weathertwin.configuration;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +12,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class CorsConfig {
 
-  /*
-   * CORS allowed origins is referenced from application properties file.
-   */
+  /** CORS allowed origins is referenced from application properties file. */
   private static String CORS_ALLOWED_ORIGIN;
 
   @Value("${CorsAllowedOrigin}")
