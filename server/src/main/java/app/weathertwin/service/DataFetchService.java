@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,17 @@ public class DataFetchService {
 
   public DataFetchService(WeatherDataRepository weatherDataRepository) {
     this.weatherDataRepository = weatherDataRepository;
+  }
+
+  /*
+   * City coordinates file path is referenced from application properties file.
+   * This enables dev environment to use a lighter test set than production
+   */
+  private static String CITY_COORDINATES_FILE_PATH;
+
+  @Value("${CityCoordinatesFilePath}")
+  public void setStaticName(String name) {
+    CITY_COORDINATES_FILE_PATH = name;
   }
 
   /**
@@ -43,7 +55,7 @@ public class DataFetchService {
     try {
       /* Source: https://www.baeldung.com/jackson-object-mapper-tutorial */
       ObjectMapper objectMapper = new ObjectMapper();
-      InputStream cityCoordStream = getClass().getResourceAsStream("/citiesLatsAndLons.json");
+      InputStream cityCoordStream = getClass().getResourceAsStream(CITY_COORDINATES_FILE_PATH);
       JsonNode rootNode = objectMapper.readValue(cityCoordStream, JsonNode.class);
 
       /* We start looping the city data in the JSON file */

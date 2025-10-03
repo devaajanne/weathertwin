@@ -43,5 +43,85 @@
     "city": "Cape_Town",
     "country_code": "ZA",
     "coords": { "lat": -33.929, "lon": 18.4174 }
+  },
+  {
+    "city": "Rome",
+    "country_code": "IT",
+    "coords": { "lat": 41.9027, "lon": 12.4963 }
+  },
+  {
+    "city": "Moscow",
+    "country_code": "RU",
+    "coords": { "lat": 55.7558, "lon": 37.6173 }
+  },
+  {
+    "city": "Bangkok",
+    "country_code": "TH",
+    "coords": { "lat": 13.7563, "lon": 100.5018 }
+  },
+  {
+    "city": "Singapore",
+    "country_code": "SG",
+    "coords": { "lat": 1.3521, "lon": 103.8198 }
+  },
+  {
+    "city": "Dubai",
+    "country_code": "AE",
+    "coords": { "lat": 25.2048, "lon": 55.2708 }
+  },
+  {
+    "city": "Rio_de_Janeiro",
+    "country_code": "BR",
+    "coords": { "lat": -22.9068, "lon": -43.1729 }
+  },
+  {
+    "city": "Toronto",
+    "country_code": "CA",
+    "coords": { "lat": 43.6532, "lon": -79.3832 }
+  },
+  {
+    "city": "Mumbai",
+    "country_code": "IN",
+    "coords": { "lat": 19.0760, "lon": 72.8777 }
+  },
+  {
+    "city": "Mexico_City",
+    "country_code": "MX",
+    "coords": { "lat": 19.4326, "lon": -99.1332 }
+  },
+  {
+    "city": "Nairobi",
+    "country_code": "KE",
+    "coords": { "lat": -1.2921, "lon": 36.8219 }
+  },
+  {
+    "city": "Stockholm",
+    "country_code": "SE",
+    "coords": { "lat": 59.3293, "lon": 18.0686 }
+  },
+  {
+    "city": "Buenos_Aires",
+    "country_code": "AR",
+    "coords": { "lat": -34.6037, "lon": -58.3816 }
+  },
+  {
+    "city": "Istanbul",
+    "country_code": "TR",
+    "coords": { "lat": 41.0082, "lon": 28.9784 }
+  },
+  {
+    "city": "Auckland",
+    "country_code": "NZ",
+    "coords": { "lat": -36.8485, "lon": 174.7633 }
+  },
+  {
+    "city": "Seoul",
+    "country_code": "KR",
+    "coords": { "lat": 37.5665, "lon": 126.9780 }
+  },
+  {
+    "city": "Vancouver",
+    "country_code": "CA",
+    "coords": { "lat": 49.2827, "lon": -123.1207 }
   }
 ]
