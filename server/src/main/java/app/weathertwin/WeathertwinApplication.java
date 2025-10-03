@@ -16,6 +16,5 @@ public class WeathertwinApplication {
    */
   public static void main(String[] args) {
     SpringApplication.run(WeathertwinApplication.class, args);
-    System.out.println("Weather Twin is running");
   }
 }

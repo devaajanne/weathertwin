@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,9 +20,13 @@ import org.springframework.stereotype.Service;
 public class DataFetchService {
 
   private final WeatherDataRepository weatherDataRepository;
+  private final LoggerService loggerService;
 
-  public DataFetchService(WeatherDataRepository weatherDataRepository) {
+  public DataFetchService(
+      WeatherDataRepository weatherDataRepository,
+      @Qualifier("dataFetchServiceLogger") LoggerService loggerService) {
     this.weatherDataRepository = weatherDataRepository;
+    this.loggerService = loggerService;
   }
 
   /*
@@ -87,7 +92,8 @@ public class DataFetchService {
         weatherData.setCity(rootNode.get(i).get("city").asText().replace("_", " "));
 
         weatherDataRepository.save(weatherData);
-        System.out.println("City nro " + (i + 1));
+        loggerService.info(
+            "City nro {}: {}, {}", (i + 1), weatherData.getCity(), weatherData.getCountryCode());
       }
     } catch (InterruptedException | IOException exception) {
       exception.printStackTrace();
