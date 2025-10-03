@@ -26,7 +26,7 @@ public class QueryService {
    * @param inputWeatherData a WeatherData object for the input city
    * @return a list of criteria matching WeatherData objects
    */
-  public List<WeatherData> findSimilarWeatherDataFromrepository(WeatherData inputWeatherData) {
+  public List<WeatherData> findSimilarWeatherDataFromRepository(WeatherData inputWeatherData) {
     /*
      * Input and similar location temperatures must be no more than 1 kelvin from
      * one another
