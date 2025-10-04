@@ -3,6 +3,7 @@ package app.weathertwin.controller;
 import app.weathertwin.entity.WeatherData;
 import app.weathertwin.service.ControllerService;
 import java.util.HashMap;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +28,17 @@ public class WeathertwinController {
    * @param requestParam input latitude coordinate as double sent from client
    * @param requestParam input longitude coordinate as double sent from client
    * @param requestParam input unit as string sent from client
-   * @return HashMap with two entries: input location WeatherData, and similar location WeatherData
+   * @return OK response with a two entry HashMap: input location WeatherData and similar location
+   *     WeatherData
    */
   @GetMapping("/weatherdata")
-  public HashMap<String, WeatherData> getCityWeatherData(
+  public ResponseEntity<HashMap<String, WeatherData>> getCityWeatherData(
       @RequestParam String city,
       @RequestParam double lat,
       @RequestParam double lon,
       @RequestParam String unit) {
-    return controllerService.getWeatherTwinData(city, lat, lon, unit);
+    HashMap<String, WeatherData> responseMap =
+        controllerService.getWeatherTwinData(city, lat, lon, unit);
+    return ResponseEntity.ok(responseMap);
   }
 }
