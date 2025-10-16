@@ -98,7 +98,7 @@ Weather icons use this icon pack: [Weather Icons](https://erikflowers.github.io/
 [![Liquibase][liquibase-logo]][liquibase-url]
 [![Heroku][heroku-logo]][heroku-url]
 
-The server-side of this application has been written in [Java](https://www.java.com/en/) version 23, using [Spring Boot](https://spring.io/projects/spring-boot) version 3.5.5 and [Gradle](https://gradle.org/) version 8.11.1. Database has been created with [PostgreSQL](https://www.postgresql.org/) with database migration with [Liquibase](https://www.liquibase.com/). For reading JSON files, [Jackson](https://github.com/FasterXML/jackson) library is used.
+The server-side of this application has been written in [Java](https://www.java.com/en/) version 23, using [Spring Boot](https://spring.io/projects/spring-boot) version 3.5.6 and [Gradle](https://gradle.org/) version 8.11.1. Database has been created with [PostgreSQL](https://www.postgresql.org/) with database migration with [Liquibase](https://www.liquibase.com/). For reading JSON files, [Jackson](https://github.com/FasterXML/jackson) library is used.
 
 Server-side app and PostgreSQL database are deployed on [Heroku](https://www.heroku.com/).
 
