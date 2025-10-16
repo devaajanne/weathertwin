@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import app.weathertwin.entity.WeatherData;
 import app.weathertwin.repository.WeatherDataRepository;
 import app.weathertwin.service.ConversionService;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
  */
 @SpringBootTest
 @ActiveProfiles("test")
+@Tag("integrationTest")
 public class ConversionServiceIntegrationTests {
 
   @Autowired private WeatherDataRepository weatherDataRepository;

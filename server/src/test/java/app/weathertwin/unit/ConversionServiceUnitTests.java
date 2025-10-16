@@ -3,6 +3,7 @@ package app.weathertwin.unit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import app.weathertwin.service.ConversionService;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -13,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
  * units. The tests run under the "test" profile.
  */
 @ActiveProfiles("test")
+@Tag("unitTest")
 public class ConversionServiceUnitTests {
 
   /** Tests the conversion from standard (Kelvin) to metric (Celsius) temperature units. */

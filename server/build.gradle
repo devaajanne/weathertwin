@@ -38,6 +38,24 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+tasks.register('runUnitTests', Test) {
+    description = 'Task to run only unit tests'
+    group = 'verification'
+
+    useJUnitPlatform {
+        includeTags 'unitTest'
+    }
+}
+
+tasks.register('runIntegrationTests', Test) {
+    description = 'Task to run only integration tests'
+    group = 'verification'
+
+    useJUnitPlatform {
+        includeTags 'integrationTest'
+    }
+}
+
 spotless {
     java {
         googleJavaFormat('1.28.0')

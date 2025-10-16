@@ -8,6 +8,54 @@ on:
   workflow_dispatch:
 
 jobs:
+  run-server-unit-tests:
+    name: Run Server unit tests
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "temurin"
+
+      - name: Grant Gradle execute permissions
+        run: |
+          cd server
+          chmod +x ./gradlew
+
+      - name: Run server unit tests
+        run: |
+          cd server
+          ./gradlew runUnitTests
+    
+  run-server-integration-tests:
+    name: Run Server integration tests
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "temurin"
+
+      - name: Grant Gradle execute permissions
+        run: |
+          cd server
+          chmod +x ./gradlew
+
+      - name: Run server integration tests
+        run: |
+          cd server
+          ./gradlew runIntegrationTests
+      
   run-server-formatting-check:
     name: Run Server formatting check
     runs-on: ubuntu-latest
@@ -16,10 +64,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up JDK 23
         uses: actions/setup-java@v4
         with:
-          java-version: "21"
+          java-version: "23"
           distribution: "temurin"
 
       - name: Grant Gradle execute permissions
