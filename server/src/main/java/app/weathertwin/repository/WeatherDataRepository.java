@@ -67,14 +67,11 @@ public interface WeatherDataRepository extends CrudRepository<WeatherData, Long>
 
   @Query(
       value =
-          "SELECT * FROM weatherDataTable WHERE (lat = :lat) AND (lon = :lon) AND (city = :city) AND (country_Code = :countryCode)",
+          "SELECT * FROM weatherdatatable WHERE (lat = :lat) AND (lon = :lon) AND (city = :city) AND (country_Code = :countryCode)",
       nativeQuery = true)
   WeatherData findDuplicateCity(
       @Param("lat") double lat,
       @Param("lon") double lon,
       @Param("city") String city,
       @Param("countryCode") String countryCode);
-
-  @Query(value = "DELETE FROM weatherdatatable", nativeQuery = true)
-  void deleteWeatherData();
 }

@@ -50,7 +50,7 @@ public class DataFetchService {
    */
   @Scheduled(fixedRate = 172_800_000)
   public void clearDatabase() {
-    weatherDataRepository.deleteWeatherData();
+    weatherDataRepository.deleteAll();
   }
 
   /**
