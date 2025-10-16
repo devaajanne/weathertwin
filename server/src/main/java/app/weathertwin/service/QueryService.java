@@ -75,4 +75,15 @@ public class QueryService {
 
     return countryName;
   }
+
+  public void removeDuplicateCityFromDatabase(WeatherData weatherData) {
+    double lat = weatherData.getLat();
+    double lon = weatherData.getLon();
+    String city = weatherData.getCity();
+    String countryCode = weatherData.getCountryCode();
+
+    if (weatherDataRepository.findDuplicateCity(lat, lon, city, countryCode) != null) {
+      weatherDataRepository.delete(weatherData);
+    }
+  }
 }

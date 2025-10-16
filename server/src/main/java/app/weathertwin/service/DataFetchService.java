@@ -21,12 +21,15 @@ public class DataFetchService {
 
   private final WeatherDataRepository weatherDataRepository;
   private final LoggerService loggerService;
+  private final QueryService queryService;
 
   public DataFetchService(
       WeatherDataRepository weatherDataRepository,
-      @Qualifier("dataFetchServiceLogger") LoggerService loggerService) {
+      @Qualifier("dataFetchServiceLogger") LoggerService loggerService,
+      QueryService queryService) {
     this.weatherDataRepository = weatherDataRepository;
     this.loggerService = loggerService;
+    this.queryService = queryService;
   }
 
   /*
@@ -47,7 +50,7 @@ public class DataFetchService {
    */
   @Scheduled(fixedRate = 172_800_000)
   public void clearDatabase() {
-    weatherDataRepository.deleteAll();
+    weatherDataRepository.deleteWeatherData();
   }
 
   /**
@@ -84,6 +87,9 @@ public class DataFetchService {
          */
         JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
         WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
+
+        /* We check if the city already exists in the database with a different id and remove it*/
+        queryService.removeDuplicateCityFromDatabase(weatherData);
 
         /*
          * Here we set the weather data object's city attribute from the JSON file. This
