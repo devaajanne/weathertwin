@@ -22,6 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 @Tag("integrationTest")
 public class ConversionServiceIntegrationTests {
 
+  @Autowired private ConversionService conversionService;
   @Autowired private WeatherDataRepository weatherDataRepository;
 
   /**
@@ -33,7 +34,7 @@ public class ConversionServiceIntegrationTests {
     WeatherData weatherData = weatherDataRepository.findById(1L).get();
     Double metricTemp = 2.0;
 
-    WeatherData newWeatherData = ConversionService.convertTemp(weatherData, "metric");
+    WeatherData newWeatherData = conversionService.convertTemp(weatherData, "metric");
 
     assertEquals(metricTemp, newWeatherData.getTemp());
   }
@@ -47,7 +48,7 @@ public class ConversionServiceIntegrationTests {
     WeatherData weatherData = weatherDataRepository.findById(1L).get();
     Double imperialTemp = 36.0;
 
-    WeatherData newWeatherData = ConversionService.convertTemp(weatherData, "imperial");
+    WeatherData newWeatherData = conversionService.convertTemp(weatherData, "imperial");
 
     assertEquals(imperialTemp, newWeatherData.getTemp());
   }

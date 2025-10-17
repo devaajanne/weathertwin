@@ -19,17 +19,23 @@ import org.springframework.stereotype.Service;
 @Profile("!test")
 public class DataFetchService {
 
-  private final WeatherDataRepository weatherDataRepository;
+  private final ConversionService conversionService;
+  private final HttpService httpService;
   private final LoggerService loggerService;
   private final QueryService queryService;
+  private final WeatherDataRepository weatherDataRepository;
 
   public DataFetchService(
-      WeatherDataRepository weatherDataRepository,
+      ConversionService conversionService,
+      HttpService httpService,
       @Qualifier("dataFetchServiceLogger") LoggerService loggerService,
-      QueryService queryService) {
-    this.weatherDataRepository = weatherDataRepository;
+      QueryService queryService,
+      WeatherDataRepository weatherDataRepository) {
+    this.conversionService = conversionService;
+    this.httpService = httpService;
     this.loggerService = loggerService;
     this.queryService = queryService;
+    this.weatherDataRepository = weatherDataRepository;
   }
 
   /*
@@ -85,8 +91,8 @@ public class DataFetchService {
          * We convert the fetched JSON data to a WeatherData object because the API
          * returns a lot more information than we actually need for our needs
          */
-        JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
-        WeatherData weatherData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
+        JsonNode cityWeatherDataJSON = httpService.fetchWeatherData(lat, lon);
+        WeatherData weatherData = conversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
 
         /* We check if the city already exists in the database with a different id and remove it*/
         queryService.removeDuplicateCityFromDatabase(weatherData);

@@ -10,9 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ControllerService {
 
+  private final ConversionService conversionService;
+  private final HttpService httpService;
   private final QueryService queryService;
 
-  public ControllerService(QueryService queryService) {
+  public ControllerService(
+      ConversionService conversionService, HttpService httpService, QueryService queryService) {
+    this.conversionService = conversionService;
+    this.httpService = httpService;
     this.queryService = queryService;
   }
 
@@ -31,8 +36,8 @@ public class ControllerService {
      * We first find the weather data for the user's input location and convert JSON
      * data from OpenWeatherMap API into a WeatherData object.
      */
-    JsonNode cityWeatherDataJSON = HttpService.fetchWeatherData(lat, lon);
-    WeatherData inputLocationData = ConversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
+    JsonNode cityWeatherDataJSON = httpService.fetchWeatherData(lat, lon);
+    WeatherData inputLocationData = conversionService.JsonNodeToWeatherData(cityWeatherDataJSON);
 
     /*
      * Then we collect locations with similar weather to a list using our SQL query
@@ -51,7 +56,7 @@ public class ControllerService {
     inputLocationData.setCity((city.split(","))[0]);
     inputLocationData.setCountryName(
         queryService.findCountryNameByCountryCode(inputLocationData.getCountryCode()));
-    returnedMap.put("inputLocation", ConversionService.convertTemp(inputLocationData, unit));
+    returnedMap.put("inputLocation", conversionService.convertTemp(inputLocationData, unit));
 
     /*
      * Random is initialized because we want to get a random location from the list
@@ -72,7 +77,7 @@ public class ControllerService {
           similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size()));
       similarLocationData.setCountryName(
           queryService.findCountryNameByCountryCode(similarLocationData.getCountryCode()));
-      returnedMap.put("similarLocation", ConversionService.convertTemp(similarLocationData, unit));
+      returnedMap.put("similarLocation", conversionService.convertTemp(similarLocationData, unit));
     }
 
     /*

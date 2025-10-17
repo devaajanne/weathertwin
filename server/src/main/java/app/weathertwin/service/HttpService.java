@@ -10,7 +10,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
  * object from the API.
  */
 @Service
-@Profile("!test")
 public class HttpService {
 
   /*
@@ -44,7 +42,7 @@ public class HttpService {
    * @param lon longitude coordinate of the city.
    * @return JSON object with the city's weather data.
    */
-  public static JsonNode fetchWeatherData(Double lat, Double lon) {
+  public JsonNode fetchWeatherData(Double lat, Double lon) {
     JsonNode weatherData = JsonNodeFactory.instance.objectNode();
 
     /*

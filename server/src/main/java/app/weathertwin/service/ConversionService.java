@@ -18,7 +18,7 @@ public class ConversionService {
    * @param standardTemp temperature in kelvin
    * @return temperature in Celsius
    */
-  public static Double tempStandardToMetric(Double standardTemp) {
+  public Double tempStandardToMetric(Double standardTemp) {
     DecimalFormat oneDecimalPlace = new DecimalFormat("0.0");
     Double metricTemp =
         Double.valueOf(oneDecimalPlace.format(standardTemp - 273.15).replace(",", "."));
@@ -31,7 +31,7 @@ public class ConversionService {
    * @param standardTemp temperature in kelvin
    * @return temperature in Fahrenheit
    */
-  public static Double tempStandardToImperial(Double standardTemp) {
+  public Double tempStandardToImperial(Double standardTemp) {
     DecimalFormat zeroDecimalPlace = new DecimalFormat("0");
     Double imperialTemp =
         Double.valueOf(zeroDecimalPlace.format(standardTemp * 1.8 - 459.67).replace(",", "."));
@@ -47,7 +47,7 @@ public class ConversionService {
    * @return a WeatherData object with only the fields we need from the JSON object, or an empty
    *     WeatherData object
    */
-  public static WeatherData JsonNodeToWeatherData(JsonNode cityWeatherDataJSON) {
+  public WeatherData JsonNodeToWeatherData(JsonNode cityWeatherDataJSON) {
     WeatherData weatherData = new WeatherData();
 
     if (cityWeatherDataJSON == null) {
@@ -88,7 +88,7 @@ public class ConversionService {
    * @return the WeatherData object in @param with the correct temperature unit and temperature
    *     symbol
    */
-  public static WeatherData convertTemp(WeatherData weatherData, String unit) {
+  public WeatherData convertTemp(WeatherData weatherData, String unit) {
 
     /* If no unit is given, standard (kelvin) temperature is returned */
     if (unit == null) {
