@@ -1,6 +1,6 @@
-package app.weathertwin;
+package app.weathertwin.configuration;
 
 import org.springframework.boot.test.context.TestConfiguration;
 
 @TestConfiguration
-public class TestSetup {}
+public class TestConfig {}
