@@ -1,6 +1,6 @@
 package app.weathertwin.controller;
 
-import app.weathertwin.domain.WeatherData;
+import app.weathertwin.dto.WeatherDataResponse;
 import app.weathertwin.service.ControllerService;
 import java.util.HashMap;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +32,12 @@ public class WeathertwinController {
    *     WeatherData
    */
   @GetMapping("/weatherdata")
-  public ResponseEntity<HashMap<String, WeatherData>> getCityWeatherData(
+  public ResponseEntity<HashMap<String, WeatherDataResponse>> getCityWeatherData(
       @RequestParam String city,
       @RequestParam double lat,
       @RequestParam double lon,
       @RequestParam String unit) {
-    HashMap<String, WeatherData> responseMap =
+    HashMap<String, WeatherDataResponse> responseMap =
         controllerService.getWeatherTwinData(city, lat, lon, unit);
     return ResponseEntity.ok(responseMap);
   }

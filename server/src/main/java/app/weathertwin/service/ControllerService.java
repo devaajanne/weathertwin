@@ -1,6 +1,7 @@
 package app.weathertwin.service;
 
 import app.weathertwin.domain.WeatherData;
+import app.weathertwin.dto.WeatherDataResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.HashMap;
 import java.util.List;
@@ -13,15 +14,20 @@ public class ControllerService {
   private final ConversionService conversionService;
   private final HttpService httpService;
   private final QueryService queryService;
+  private final MapperService mapperService;
 
   public ControllerService(
-      ConversionService conversionService, HttpService httpService, QueryService queryService) {
+      ConversionService conversionService,
+      HttpService httpService,
+      QueryService queryService,
+      MapperService mapperService) {
     this.conversionService = conversionService;
     this.httpService = httpService;
     this.queryService = queryService;
+    this.mapperService = mapperService;
   }
 
-  public HashMap<String, WeatherData> getWeatherTwinData(
+  public HashMap<String, WeatherDataResponse> getWeatherTwinData(
       String city, double lat, double lon, String unit) {
     /*
      * We initialize a new HashMap to store
@@ -30,7 +36,7 @@ public class ControllerService {
      * This map is returned to the client.
      * We also store the user's selected unit (metric/imperial) in to variable
      */
-    HashMap<String, WeatherData> returnedMap = new HashMap<String, WeatherData>();
+    HashMap<String, WeatherDataResponse> responseMap = new HashMap<String, WeatherDataResponse>();
 
     /*
      * We first find the weather data for the user's input location and convert JSON
@@ -50,13 +56,16 @@ public class ControllerService {
      * param, so we set this as the WeatherData object's cityName. This is because
      * sometimes, OpenWeatherMap API gets the city names wrong for locations that
      * are found with lat and lon data. We also set the correct country name based
-     * on the country code, and store the input location's weather data into the map
-     * that we will return to the client
+     * on the country code, and map and store the input location's weather data into
+     * the response map that we will return to the client.
      */
     inputLocationData.setCity((city.split(","))[0]);
     inputLocationData.setCountryName(
         queryService.findCountryNameByCountryCode(inputLocationData.getCountryCode()));
-    returnedMap.put("inputLocation", conversionService.convertTemp(inputLocationData, unit));
+    responseMap.put(
+        "inputLocation",
+        mapperService.toWeatherDataResponse(
+            conversionService.convertTemp(inputLocationData, unit)));
 
     /*
      * Random is initialized because we want to get a random location from the list
@@ -66,24 +75,27 @@ public class ControllerService {
 
     /*
      * If no similar weather locations are found, we store the value "null" as the
-     * similar location's weather data in to the returned map.
+     * similar location's weather data in to the response map.
      * If similar weather locations are found, we select a random location, set the
-     * correct country name and temperature unit and store it into the returned map
+     * correct country name and temperature unit and map and store it into the response map
      */
     if (similarWeatherDataList.isEmpty()) {
-      returnedMap.put("similarLocation", null);
+      responseMap.put("similarLocation", null);
     } else {
       WeatherData similarLocationData =
           similarWeatherDataList.get(random.nextInt(similarWeatherDataList.size()));
       similarLocationData.setCountryName(
           queryService.findCountryNameByCountryCode(similarLocationData.getCountryCode()));
-      returnedMap.put("similarLocation", conversionService.convertTemp(similarLocationData, unit));
+      responseMap.put(
+          "similarLocation",
+          mapperService.toWeatherDataResponse(
+              conversionService.convertTemp(similarLocationData, unit)));
     }
 
     /*
      * Finally, we return the HashMap with the input and similar locations' weather
      * data to the controller
      */
-    return returnedMap;
+    return responseMap;
   }
 }
