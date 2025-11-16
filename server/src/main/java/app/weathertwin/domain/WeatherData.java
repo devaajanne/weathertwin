@@ -1,4 +1,4 @@
-package app.weathertwin.entity;
+package app.weathertwin.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

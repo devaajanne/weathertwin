@@ -1,6 +1,6 @@
 package app.weathertwin.controller;
 
-import app.weathertwin.entity.WeatherData;
+import app.weathertwin.domain.WeatherData;
 import app.weathertwin.service.ControllerService;
 import java.util.HashMap;
 import org.springframework.http.ResponseEntity;

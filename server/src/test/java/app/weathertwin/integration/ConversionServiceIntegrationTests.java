@@ -2,7 +2,7 @@ package app.weathertwin.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import app.weathertwin.entity.WeatherData;
+import app.weathertwin.domain.WeatherData;
 import app.weathertwin.repository.WeatherDataRepository;
 import app.weathertwin.service.ConversionService;
 import org.junit.jupiter.api.Tag;

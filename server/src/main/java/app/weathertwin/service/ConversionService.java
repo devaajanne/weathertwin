@@ -1,7 +1,9 @@
 package app.weathertwin.service;
 
-import app.weathertwin.entity.WeatherData;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import app.weathertwin.domain.WeatherData;
+
 import java.text.DecimalFormat;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package app.weathertwin.service;
 
-import app.weathertwin.entity.WeatherData;
+import app.weathertwin.domain.WeatherData;
 import app.weathertwin.repository.WeatherDataRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

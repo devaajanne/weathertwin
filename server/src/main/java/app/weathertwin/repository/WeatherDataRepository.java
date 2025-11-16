@@ -1,10 +1,11 @@
 package app.weathertwin.repository;
 
-import app.weathertwin.entity.WeatherData;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import app.weathertwin.domain.WeatherData;
 
 /** This is the repository that stores WeatherData objects */
 public interface WeatherDataRepository extends CrudRepository<WeatherData, Long> {
