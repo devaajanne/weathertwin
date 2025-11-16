@@ -1,9 +1,7 @@
 package app.weathertwin.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import app.weathertwin.domain.WeatherData;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
