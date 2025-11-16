@@ -19,28 +19,28 @@ public class WeatherData {
    * database, so the column names must be given in snake_case.
    */
 
-  @Id Long id;
+  @Id private Long id;
 
-  Double lat;
-  Double lon;
-  String city;
+  private Double lat;
+  private Double lon;
+  private String city;
 
   @Column(name = "country_code")
-  String countryCode;
+  private String countryCode;
 
   @Column(name = "country_name")
-  String countryName;
+  private String countryName;
 
-  Double temp;
+  private Double temp;
 
   @Column(name = "temp_unit")
-  String tempUnit;
+  private String tempUnit;
 
   @Column(name = "weather_group")
-  String weatherGroup;
+  private String weatherGroup;
 
   @Column(name = "weather_id")
-  String weatherId;
+  private String weatherId;
 
   /* No-arg and arg constructors */
   public WeatherData() {}
