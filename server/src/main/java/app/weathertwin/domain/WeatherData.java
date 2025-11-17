@@ -4,10 +4,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /** WeatherData is the main entity in this application. It stores weather data for one city. */
 @Entity
 @Table(name = "weatherdatatable")
+@Data // Getters, setters, and toString() methods
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeatherData {
 
   /*
@@ -41,199 +47,4 @@ public class WeatherData {
 
   @Column(name = "weather_id")
   private String weatherId;
-
-  /* No-arg and arg constructors */
-  public WeatherData() {}
-
-  public WeatherData(
-      Long id,
-      Double lat,
-      Double lon,
-      String city,
-      String countryCode,
-      String countryName,
-      Double temp,
-      String tempUnit,
-      String weatherGroup,
-      String weatherId) {
-    this.id = id;
-    this.lat = lat;
-    this.lon = lon;
-    this.city = city;
-    this.countryCode = countryCode;
-    this.countryName = countryName;
-    this.temp = temp;
-    this.tempUnit = tempUnit;
-    this.weatherGroup = weatherGroup;
-    this.weatherId = weatherId;
-  }
-
-  /* Getters and setters */
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public WeatherData id(Long id) {
-    setId(id);
-    return this;
-  }
-
-  public Double getLat() {
-    return this.lat;
-  }
-
-  public void setLat(Double lat) {
-    this.lat = lat;
-  }
-
-  public WeatherData lat(Double lat) {
-    setLat(lat);
-    return this;
-  }
-
-  public Double getLon() {
-    return this.lon;
-  }
-
-  public void setLon(Double lon) {
-    this.lon = lon;
-  }
-
-  public WeatherData lon(Double lon) {
-    setLon(lon);
-    return this;
-  }
-
-  public Double getTemp() {
-    return this.temp;
-  }
-
-  public void setTemp(Double temp) {
-    this.temp = temp;
-  }
-
-  public WeatherData temp(Double temp) {
-    setTemp(temp);
-    return this;
-  }
-
-  public String getCity() {
-    return this.city;
-  }
-
-  public void setCity(String city) {
-    this.city = city;
-  }
-
-  public WeatherData city(String city) {
-    setCity(city);
-    return this;
-  }
-
-  public String getCountryCode() {
-    return this.countryCode;
-  }
-
-  public void setCountryCode(String countryCode) {
-    this.countryCode = countryCode;
-  }
-
-  public WeatherData countryCode(String countryCode) {
-    setCountryCode(countryCode);
-    return this;
-  }
-
-  public String getCountryName() {
-    return this.countryName;
-  }
-
-  public void setCountryName(String countryName) {
-    this.countryName = countryName;
-  }
-
-  public WeatherData countryName(String countryName) {
-    setCountryName(countryName);
-    return this;
-  }
-
-  public String getTempUnit() {
-    return this.tempUnit;
-  }
-
-  public void setTempUnit(String tempUnit) {
-    this.tempUnit = tempUnit;
-  }
-
-  public WeatherData tempUnit(String tempUnit) {
-    setTempUnit(tempUnit);
-    return this;
-  }
-
-  public String getWeatherId() {
-    return this.weatherId;
-  }
-
-  public void setWeatherId(String weatherId) {
-    this.weatherId = weatherId;
-  }
-
-  public WeatherData weatherId(String weatherId) {
-    setWeatherId(weatherId);
-    return this;
-  }
-
-  public String getWeatherGroup() {
-    return this.weatherGroup;
-  }
-
-  public void setWeatherGroup(String weatherGroup) {
-    this.weatherGroup = weatherGroup;
-  }
-
-  public WeatherData weatherGroup(String weatherGroup) {
-    setWeatherGroup(weatherGroup);
-    return this;
-  }
-
-  /* Finally, toString() method */
-  @Override
-  public String toString() {
-    return "{"
-        + " id='"
-        + getId()
-        + "'"
-        + ", lat='"
-        + getLat()
-        + "'"
-        + ", lon='"
-        + getLon()
-        + "'"
-        + ", temp='"
-        + getTemp()
-        + "'"
-        + ", city='"
-        + getCity()
-        + "'"
-        + ", countryCode='"
-        + getCountryCode()
-        + "'"
-        + ", countryName='"
-        + getCountryName()
-        + "'"
-        + ", tempUnit='"
-        + getTempUnit()
-        + "'"
-        + ", weatherId='"
-        + getWeatherId()
-        + "'"
-        + ", weatherGroup='"
-        + getWeatherGroup()
-        + "'"
-        + "}";
-  }
 }
