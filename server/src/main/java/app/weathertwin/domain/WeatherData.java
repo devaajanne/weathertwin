@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "weatherdatatable")
 @Data // Getters, setters, and toString() methods
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor // Default constructor with no parameters
+@AllArgsConstructor // Parameterized constructor
 public class WeatherData {
 
   /*
