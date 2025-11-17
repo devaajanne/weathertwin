@@ -27,6 +27,8 @@ import GooglePlacesAutocomplete, {
 import { fetchWeatherData } from "../../api/ApiCalls";
 import { getDefaultCity, sleep } from "../../utils/Utils";
 
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+
 export default function WeatherSearch({
   setInputLocation,
   setSimilarLocation,
@@ -129,6 +131,7 @@ export default function WeatherSearch({
         <FormControl>
           <Box display="flex" justifyContent="center" alignItems="center">
             <GooglePlacesAutocomplete
+              apiKey={GOOGLE_API_KEY}
               autocompletionRequest={{ types: ["locality"] }}
               debounce={500}
               selectProps={{
