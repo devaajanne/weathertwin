@@ -80,8 +80,7 @@ Weather Twin is now live at GitHub pages! See the live demo of the app here: [We
 [![JavaScript][javascript-logo]][javascript-url]
 [![React][react-logo]][react-url]
 
-
-This app has been written in JavaScript and [React](https://react.dev/). Installed libraries include
+This app has been written in JavaScript and [React](https://react.dev/), using [Node.js](https://nodejs.org/en) version 24.11.1 and [npm](https://www.npmjs.com/) 11.6.0. Installed libraries include
 
 - [Material UI](https://mui.com/material-ui/)
 - [Axios](https://www.npmjs.com/package/axios)
@@ -89,6 +88,7 @@ This app has been written in JavaScript and [React](https://react.dev/). Install
 
 Weather icons use this icon pack: [Weather Icons](https://erikflowers.github.io/weather-icons/)
 
+Client-side app is deployed on GitHub Pages.
 
 ### Server-side
 [![Java][java-logo]][java-url]
