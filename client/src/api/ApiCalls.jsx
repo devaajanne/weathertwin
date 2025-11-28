@@ -4,7 +4,7 @@ const URL = import.meta.env.VITE_SERVER_URL;
 
 const fetchWeatherData = async (queryData) => {
   try {
-    const response = await axios.get(`${URL}/weatherdata`, {
+    const response = await axios.get(`${URL}/api/weatherdata`, {
       params: queryData,
     });
     return response;
