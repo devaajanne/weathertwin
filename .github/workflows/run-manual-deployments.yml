@@ -1,0 +1,66 @@
+name: Run manual deployments
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-server:
+    name: Deploy server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Deploy server to Heroku
+        uses: akhileshns/heroku-deploy@v3.14.15
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "server"
+  
+  deploy-client:
+    name: Deploy client
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    needs: deploy-server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Configure Git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name ${{secrets.GH_USER_NAME}}
+          git config --global user.email ${{secrets.GH_USER_EMAIL}}
+
+          # Set the remote URL with authentication token
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Deploy client to GitHub Pages
+        env:
+          VITE_SERVER_URL: ${{ secrets.HEROKU_URL }}
+          VITE_BASE_PATH: /weathertwin/
+          VITE_GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          cd client
+          npm run deploy
