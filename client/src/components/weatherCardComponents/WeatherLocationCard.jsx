@@ -22,7 +22,7 @@ export default function WeatherLocationCard({ location }) {
   const weatherIconClass = `wi wi-owm-${location.weatherId}`;
   const weatherIconAlt = `${location.weatherGroup} icon`;
 
-  const weatherURL = `https://openweathermap.org/city/${location.id}`;
+  const weatherURL = `https://old.openweathermap.org/city/${location.id}`;
 
   return (
     <>

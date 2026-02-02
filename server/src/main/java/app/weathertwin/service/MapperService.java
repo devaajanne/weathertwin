@@ -11,6 +11,7 @@ public class MapperService {
   /* Mapper from Entity to Response */
   public WeatherDataResponse toWeatherDataResponse(WeatherData weatherData) {
     return new WeatherDataResponse(
+        weatherData.getId(),
         weatherData.getLat(),
         weatherData.getLon(),
         weatherData.getCity(),

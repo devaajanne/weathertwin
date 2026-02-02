@@ -14,6 +14,7 @@ public class WeatherDataResponse {
    * Here we set the attributes that we need for our WeatherDataResponse DTO objects.
    * These are the attributes that are returned to the client via REST API.
    */
+  private Long id;
   private Double lat;
   private Double lon;
   private String city;
